@@ -26,7 +26,7 @@ The plugin can then use these settings to modify its behavior. It is recommended
 into their own dedicates keys in a plugin specific key in the `plugin_settings` dictionary.
 
 ```py test="skip"
-from pydantic import BaseModel
+from pydantic2 import BaseModel
 
 
 class Foo(BaseModel, plugin_settings={'my-plugin': {'observe': 'all'}}):
@@ -59,7 +59,7 @@ from typing import Any, Dict, Optional, Union
 
 from pydantic_core import CoreConfig, CoreSchema, ValidationError
 
-from pydantic.plugin import (
+from pydantic2.plugin import (
     NewSchemaReturns,
     PydanticPluginProtocol,
     SchemaKind,
@@ -70,13 +70,13 @@ from pydantic.plugin import (
 
 class OnValidatePython(ValidatePythonHandlerProtocol):
     def on_enter(
-        self,
-        input: Any,
-        *,
-        strict: Optional[bool] = None,
-        from_attributes: Optional[bool] = None,
-        context: Optional[Dict[str, Any]] = None,
-        self_instance: Optional[Any] = None,
+            self,
+            input: Any,
+            *,
+            strict: Optional[bool] = None,
+            from_attributes: Optional[bool] = None,
+            context: Optional[Dict[str, Any]] = None,
+            self_instance: Optional[Any] = None,
     ) -> None:
         print(input)
 
@@ -89,13 +89,13 @@ class OnValidatePython(ValidatePythonHandlerProtocol):
 
 class Plugin(PydanticPluginProtocol):
     def new_schema_validator(
-        self,
-        schema: CoreSchema,
-        schema_type: Any,
-        schema_type_path: SchemaTypePath,
-        schema_kind: SchemaKind,
-        config: Union[CoreConfig, None],
-        plugin_settings: Dict[str, object],
+            self,
+            schema: CoreSchema,
+            schema_type: Any,
+            schema_type_path: SchemaTypePath,
+            schema_kind: SchemaKind,
+            config: Union[CoreConfig, None],
+            plugin_settings: Dict[str, object],
     ) -> NewSchemaReturns:
         return OnValidatePython(), None, None
 
@@ -108,7 +108,7 @@ plugin = Plugin()
 Consider that you have a plugin called setting called "observer", then you can use it like this:
 
 ```py
-from pydantic import BaseModel
+from pydantic2 import BaseModel
 
 
 class Foo(BaseModel, plugin_settings={'observer': 'all'}):

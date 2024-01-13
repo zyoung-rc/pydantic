@@ -6,10 +6,10 @@ from annotated_types import BaseMetadata, GroupedMetadata, Gt, Lt, Predicate
 from pydantic_core import PydanticUndefined, core_schema
 from typing_extensions import Annotated
 
-from pydantic import BaseModel, Field, GetCoreSchemaHandler, TypeAdapter, ValidationError
-from pydantic.errors import PydanticSchemaGenerationError
-from pydantic.fields import PrivateAttr
-from pydantic.functional_validators import AfterValidator
+from pydantic2 import BaseModel, Field, GetCoreSchemaHandler, TypeAdapter, ValidationError
+from pydantic2.errors import PydanticSchemaGenerationError
+from pydantic2.fields import PrivateAttr
+from pydantic2.functional_validators import AfterValidator
 
 NO_VALUE = object()
 
@@ -380,7 +380,7 @@ def test_predicate_error_python() -> None:
 
 
 def test_annotated_field_info_not_lost_from_forwardref():
-    from pydantic import BaseModel
+    from pydantic2 import BaseModel
 
     class ForwardRefAnnotatedFieldModel(BaseModel):
         foo: 'Annotated[Integer, Field(alias="bar", default=1)]' = 2

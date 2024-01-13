@@ -9,7 +9,7 @@ from typing import Any, ContextManager, Iterable, NamedTuple, Optional, Type, Un
 from dirty_equals import HasRepr, IsPartialDict
 from pydantic_core import SchemaError, SchemaSerializer, SchemaValidator
 
-from pydantic import (
+from pydantic2 import (
     BaseConfig,
     BaseModel,
     Field,
@@ -22,14 +22,14 @@ from pydantic import (
     field_validator,
     validate_call,
 )
-from pydantic._internal._config import ConfigWrapper, config_defaults
-from pydantic._internal._mock_val_ser import MockValSer
-from pydantic.config import ConfigDict, JsonValue
-from pydantic.dataclasses import dataclass as pydantic_dataclass
-from pydantic.errors import PydanticUserError
-from pydantic.fields import FieldInfo
-from pydantic.type_adapter import TypeAdapter
-from pydantic.warnings import PydanticDeprecationWarning
+from pydantic2._internal._config import ConfigWrapper, config_defaults
+from pydantic2._internal._mock_val_ser import MockValSer
+from pydantic2.config import ConfigDict, JsonValue
+from pydantic2.dataclasses import dataclass as pydantic_dataclass
+from pydantic2.errors import PydanticUserError
+from pydantic2.fields import FieldInfo
+from pydantic2.type_adapter import TypeAdapter
+from pydantic2.warnings import PydanticDeprecationWarning
 
 if sys.version_info < (3, 9):
     from typing_extensions import Annotated
@@ -579,7 +579,7 @@ def test_config_defaults_match():
 def test_config_is_not_inherited_in_model_fields():
     from typing import List
 
-    from pydantic import BaseModel, ConfigDict
+    from pydantic2 import BaseModel, ConfigDict
 
     class Inner(BaseModel):
         a: str

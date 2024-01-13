@@ -27,9 +27,9 @@ from pydantic_core import (
 )
 from typing_extensions import get_args, get_origin
 
-from pydantic.errors import PydanticSchemaGenerationError
-from pydantic.fields import FieldInfo
-from pydantic.types import Strict
+from pydantic2.errors import PydanticSchemaGenerationError
+from pydantic2.fields import FieldInfo
+from pydantic2.types import Strict
 
 from ..config import ConfigDict
 from ..json_schema import JsonSchemaValue, update_json_schema

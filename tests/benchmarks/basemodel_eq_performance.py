@@ -17,7 +17,7 @@ if TYPE_CHECKING:
     import numpy as np
     from matplotlib import axes, figure
 
-import pydantic
+import pydantic2
 
 PYTHON_VERSION = '.'.join(map(str, sys.version_info))
 PYDANTIC_VERSION = metadata.version('pydantic')
@@ -26,9 +26,9 @@ PYDANTIC_VERSION = metadata.version('pydantic')
 # New implementation of pydantic.BaseModel.__eq__ to test
 
 
-class OldImplementationModel(pydantic.BaseModel, frozen=True):
+class OldImplementationModel(pydantic2.BaseModel, frozen=True):
     def __eq__(self, other: Any) -> bool:
-        if isinstance(other, pydantic.BaseModel):
+        if isinstance(other, pydantic2.BaseModel):
             # When comparing instances of generic types for equality, as long as all field values are equal,
             # only require their generic origin types to be equal, rather than exact type equality.
             # This prevents headaches like MyGeneric(x=1) != MyGeneric[Any](x=1).
@@ -45,9 +45,9 @@ class OldImplementationModel(pydantic.BaseModel, frozen=True):
             return NotImplemented  # delegate to the other item in the comparison
 
 
-class DictComprehensionEqModel(pydantic.BaseModel, frozen=True):
+class DictComprehensionEqModel(pydantic2.BaseModel, frozen=True):
     def __eq__(self, other: Any) -> bool:
-        if isinstance(other, pydantic.BaseModel):
+        if isinstance(other, pydantic2.BaseModel):
             # When comparing instances of generic types for equality, as long as all field values are equal,
             # only require their generic origin types to be equal, rather than exact type equality.
             # This prevents headaches like MyGeneric(x=1) != MyGeneric[Any](x=1).
@@ -66,9 +66,9 @@ class DictComprehensionEqModel(pydantic.BaseModel, frozen=True):
             return NotImplemented  # delegate to the other item in the comparison
 
 
-class ItemGetterEqModel(pydantic.BaseModel, frozen=True):
+class ItemGetterEqModel(pydantic2.BaseModel, frozen=True):
     def __eq__(self, other: Any) -> bool:
-        if isinstance(other, pydantic.BaseModel):
+        if isinstance(other, pydantic2.BaseModel):
             # When comparing instances of generic types for equality, as long as all field values are equal,
             # only require their generic origin types to be equal, rather than exact type equality.
             # This prevents headaches like MyGeneric(x=1) != MyGeneric[Any](x=1).
@@ -88,9 +88,9 @@ class ItemGetterEqModel(pydantic.BaseModel, frozen=True):
             return NotImplemented  # delegate to the other item in the comparison
 
 
-class ItemGetterEqModelFastPath(pydantic.BaseModel, frozen=True):
+class ItemGetterEqModelFastPath(pydantic2.BaseModel, frozen=True):
     def __eq__(self, other: Any) -> bool:
-        if isinstance(other, pydantic.BaseModel):
+        if isinstance(other, pydantic2.BaseModel):
             # When comparing instances of generic types for equality, as long as all field values are equal,
             # only require their generic origin types to be equal, rather than exact type equality.
             # This prevents headaches like MyGeneric(x=1) != MyGeneric[Any](x=1).
@@ -151,9 +151,9 @@ class _SafeGetItemProxy(Generic[K, V]):
         return self.wrapped.__contains__(__key)
 
 
-class SafeItemGetterEqModelFastPath(pydantic.BaseModel, frozen=True):
+class SafeItemGetterEqModelFastPath(pydantic2.BaseModel, frozen=True):
     def __eq__(self, other: Any) -> bool:
-        if isinstance(other, pydantic.BaseModel):
+        if isinstance(other, pydantic2.BaseModel):
             # When comparing instances of generic types for equality, as long as all field values are equal,
             # only require their generic origin types to be equal, rather than exact type equality.
             # This prevents headaches like MyGeneric(x=1) != MyGeneric[Any](x=1).
@@ -183,9 +183,9 @@ class SafeItemGetterEqModelFastPath(pydantic.BaseModel, frozen=True):
             return NotImplemented  # delegate to the other item in the comparison
 
 
-class ItemGetterEqModelFastPathFallback(pydantic.BaseModel, frozen=True):
+class ItemGetterEqModelFastPathFallback(pydantic2.BaseModel, frozen=True):
     def __eq__(self, other: Any) -> bool:
-        if isinstance(other, pydantic.BaseModel):
+        if isinstance(other, pydantic2.BaseModel):
             # When comparing instances of generic types for equality, as long as all field values are equal,
             # only require their generic origin types to be equal, rather than exact type equality.
             # This prevents headaches like MyGeneric(x=1) != MyGeneric[Any](x=1).
@@ -232,7 +232,7 @@ IMPLEMENTATIONS = {
 
 
 def plot_all_benchmark(
-    bases: dict[str, type[pydantic.BaseModel]],
+    bases: dict[str, type[pydantic2.BaseModel]],
     sizes: list[int],
 ) -> figure.Figure:
     import matplotlib.pyplot as plt
@@ -259,7 +259,7 @@ def plot_all_benchmark(
 def plot_benchmark(
     title: str,
     benchmark: Callable,
-    bases: dict[str, type[pydantic.BaseModel]],
+    bases: dict[str, type[pydantic2.BaseModel]],
     sizes: list[int],
     mimic_cached_property: bool,
     ax: axes.Axes | None = None,
@@ -299,7 +299,7 @@ class SizedIterable(Sized, Iterable):
 
 def run_benchmark_nodiff(
     title: str,
-    base: type[pydantic.BaseModel],
+    base: type[pydantic2.BaseModel],
     sizes: SizedIterable,
     mimic_cached_property: bool,
     n_execution: int = 10_000,
@@ -345,7 +345,7 @@ def run_benchmark_nodiff(
 
 def run_benchmark_first_diff(
     title: str,
-    base: type[pydantic.BaseModel],
+    base: type[pydantic2.BaseModel],
     sizes: SizedIterable,
     mimic_cached_property: bool,
     n_execution: int = 10_000,
@@ -391,7 +391,7 @@ def run_benchmark_first_diff(
 
 def run_benchmark_last_diff(
     title: str,
-    base: type[pydantic.BaseModel],
+    base: type[pydantic2.BaseModel],
     sizes: SizedIterable,
     mimic_cached_property: bool,
     n_execution: int = 10_000,
@@ -438,7 +438,7 @@ def run_benchmark_last_diff(
 
 def run_benchmark_random_unequal(
     title: str,
-    base: type[pydantic.BaseModel],
+    base: type[pydantic2.BaseModel],
     sizes: SizedIterable,
     mimic_cached_property: bool,
     n_samples: int = 100,

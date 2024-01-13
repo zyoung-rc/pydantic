@@ -11,7 +11,7 @@ from annotated_types import Lt
 from pydantic_core import CoreSchema, core_schema
 from typing_extensions import Annotated, TypedDict
 
-from pydantic import (
+from pydantic2 import (
     BaseModel,
     ConfigDict,
     Field,
@@ -21,10 +21,10 @@ from pydantic import (
     PydanticUserError,
     ValidationError,
 )
-from pydantic._internal._decorators import get_attribute_from_bases
-from pydantic.functional_serializers import field_serializer, model_serializer
-from pydantic.functional_validators import field_validator, model_validator
-from pydantic.type_adapter import TypeAdapter
+from pydantic2._internal._decorators import get_attribute_from_bases
+from pydantic2.functional_serializers import field_serializer, model_serializer
+from pydantic2.functional_validators import field_validator, model_validator
+from pydantic2.type_adapter import TypeAdapter
 
 from .conftest import Err
 
@@ -500,7 +500,7 @@ def test_recursive_typeddict():
 
     from typing_extensions import TypedDict
 
-    from pydantic import BaseModel
+    from pydantic2 import BaseModel
 
     class RecursiveTypedDict(TypedDict):
         foo: Optional['RecursiveTypedDict']
@@ -575,7 +575,7 @@ def test_recursive_generic_typeddict_in_module(create_module):
 
         from typing_extensions import TypedDict
 
-        from pydantic import BaseModel
+        from pydantic2 import BaseModel
 
         T = TypeVar('T')
 

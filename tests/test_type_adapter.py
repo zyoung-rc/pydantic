@@ -8,9 +8,9 @@ import pytest
 from pydantic_core import ValidationError
 from typing_extensions import Annotated, TypeAlias, TypedDict
 
-from pydantic import BaseModel, TypeAdapter, ValidationInfo, field_validator
-from pydantic.config import ConfigDict
-from pydantic.errors import PydanticUserError
+from pydantic2 import BaseModel, TypeAdapter, ValidationInfo, field_validator
+from pydantic2.config import ConfigDict
+from pydantic2.errors import PydanticUserError
 
 ItemType = TypeVar('ItemType')
 

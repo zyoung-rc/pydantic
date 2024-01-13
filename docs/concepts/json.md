@@ -22,7 +22,7 @@ Here's an example of Pydantic's builtin JSON parsing via the [`model_validate_js
 from datetime import date
 from typing import Tuple
 
-from pydantic import BaseModel, ConfigDict, ValidationError
+from pydantic2 import BaseModel, ConfigDict, ValidationError
 
 
 class Event(BaseModel):
@@ -34,7 +34,7 @@ class Event(BaseModel):
 
 json_data = '{"when": "1987-01-28", "where": [51, -1]}'
 print(Event.model_validate_json(json_data))  # (1)!
-#> when=datetime.date(1987, 1, 28) where=(51, -1)
+# > when=datetime.date(1987, 1, 28) where=(51, -1)
 
 try:
     Event.model_validate({'when': '1987-01-28', 'where': [51, -1]})  # (2)!

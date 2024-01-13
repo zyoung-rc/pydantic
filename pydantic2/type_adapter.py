@@ -8,8 +8,8 @@ from typing import TYPE_CHECKING, Any, Dict, Generic, Iterable, Set, TypeVar, Un
 from pydantic_core import CoreSchema, SchemaSerializer, SchemaValidator, Some
 from typing_extensions import Literal, get_args, is_typeddict
 
-from pydantic.errors import PydanticUserError
-from pydantic.main import BaseModel
+from pydantic2.errors import PydanticUserError
+from pydantic2.main import BaseModel
 
 from ._internal import _config, _generate_schema, _typing_extra
 from .config import ConfigDict

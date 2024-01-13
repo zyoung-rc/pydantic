@@ -5,7 +5,7 @@ and as an argument to [`TypeAdapter`][pydantic.TypeAdapter].
     Before **v2.0**, the `Config` class was used. This is still supported, but **deprecated**.
 
 ```py
-from pydantic import BaseModel, ConfigDict, ValidationError
+from pydantic2 import BaseModel, ConfigDict, ValidationError
 
 
 class Model(BaseModel):
@@ -26,8 +26,9 @@ except ValidationError as e:
 ```
 
 Also, you can specify config options as model class kwargs:
+
 ```py
-from pydantic import BaseModel, ValidationError
+from pydantic2 import BaseModel, ValidationError
 
 
 class Model(BaseModel, extra='forbid'):  # (1)!
@@ -48,11 +49,12 @@ except ValidationError as e:
 1. See the [Extra Attributes](#extra-attributes) section for more details.
 
 Similarly, if using the [`@dataclass`][pydantic.dataclasses] decorator from Pydantic:
+
 ```py
 from datetime import datetime
 
-from pydantic import ConfigDict, ValidationError
-from pydantic.dataclasses import dataclass
+from pydantic2 import ConfigDict, ValidationError
+from pydantic2.dataclasses import dataclass
 
 config = ConfigDict(str_max_length=10, validate_assignment=True)
 
@@ -84,7 +86,7 @@ except ValidationError as e:
     from dataclasses import dataclass
     from datetime import datetime
 
-    from pydantic import ConfigDict
+    from pydantic2 import ConfigDict
 
 
     @dataclass
@@ -103,7 +105,7 @@ If you wish to change the behaviour of Pydantic globally, you can create your ow
 with custom `model_config` since the config is inherited:
 
 ```py
-from pydantic import BaseModel, ConfigDict
+from pydantic2 import BaseModel, ConfigDict
 
 
 class Parent(BaseModel):
@@ -116,13 +118,13 @@ class Model(Parent):
 
 m = Model(x='foo', y='bar')
 print(m.model_dump())
-#> {'x': 'foo', 'y': 'bar'}
+# > {'x': 'foo', 'y': 'bar'}
 ```
 
 If you add a `model_config` to the `Model` class, it will _merge_ with the `model_config` from `Parent`:
 
 ```py
-from pydantic import BaseModel, ConfigDict
+from pydantic2 import BaseModel, ConfigDict
 
 
 class Parent(BaseModel):
@@ -137,7 +139,7 @@ class Model(Parent):
 
 m = Model(x='FOO', y='bar')
 print(m.model_dump())
-#> {'x': 'foo', 'y': 'bar'}
+# > {'x': 'foo', 'y': 'bar'}
 print(m.model_config)
-#> {'extra': 'allow', 'str_to_lower': True}
+# > {'extra': 'allow', 'str_to_lower': True}
 ```

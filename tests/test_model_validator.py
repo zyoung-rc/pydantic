@@ -4,7 +4,7 @@ from typing import Any, Dict, Union, cast
 
 import pytest
 
-from pydantic import BaseModel, ValidationInfo, ValidatorFunctionWrapHandler, model_validator
+from pydantic2 import BaseModel, ValidationInfo, ValidatorFunctionWrapHandler, model_validator
 
 
 def test_model_validator_wrap() -> None:

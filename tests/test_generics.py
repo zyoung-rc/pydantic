@@ -47,7 +47,7 @@ from typing_extensions import (
     TypeVar as TypingExtensionsTypeVar,
 )
 
-from pydantic import (
+from pydantic2 import (
     BaseModel,
     Field,
     GetCoreSchemaHandler,
@@ -62,8 +62,8 @@ from pydantic import (
     field_validator,
     model_validator,
 )
-from pydantic._internal._core_utils import collect_invalid_schemas
-from pydantic._internal._generics import (
+from pydantic2._internal._core_utils import collect_invalid_schemas
+from pydantic2._internal._generics import (
     _GENERIC_TYPES_CACHE,
     _LIMITED_DICT_SIZE,
     LimitedDict,
@@ -72,7 +72,7 @@ from pydantic._internal._generics import (
     recursively_defined_type_refs,
     replace_types,
 )
-from pydantic.warnings import GenericBeforeBaseModelWarning
+from pydantic2.warnings import GenericBeforeBaseModelWarning
 
 
 @pytest.fixture()
@@ -931,7 +931,7 @@ def test_generic_model_pickle(create_module):
         import pickle
         from typing import Generic, TypeVar
 
-        from pydantic import BaseModel
+        from pydantic2 import BaseModel
 
         t = TypeVar('t')
 
@@ -958,7 +958,7 @@ def test_generic_model_from_function_pickle_fail(create_module):
 
         import pytest
 
-        from pydantic import BaseModel
+        from pydantic2 import BaseModel
 
         t = TypeVar('t')
 
@@ -985,8 +985,8 @@ def test_generic_model_redefined_without_cache_fail(create_module, monkeypatch):
     def module():
         from typing import Generic, TypeVar
 
-        from pydantic import BaseModel
-        from pydantic._internal._generics import _GENERIC_TYPES_CACHE
+        from pydantic2 import BaseModel
+        from pydantic2._internal._generics import _GENERIC_TYPES_CACHE
 
         t = TypeVar('t')
 
@@ -1018,7 +1018,7 @@ def test_generic_model_caching_detect_order_of_union_args_basic(create_module):
     def module():
         from typing import Generic, TypeVar, Union
 
-        from pydantic import BaseModel
+        from pydantic2 import BaseModel
 
         t = TypeVar('t')
 
@@ -1044,7 +1044,7 @@ def test_generic_model_caching_detect_order_of_union_args_nested(create_module):
     def module():
         from typing import Generic, List, TypeVar, Union
 
-        from pydantic import BaseModel
+        from pydantic2 import BaseModel
 
         t = TypeVar('t')
 
@@ -1061,7 +1061,7 @@ def test_generic_model_caching_detect_order_of_union_args_nested(create_module):
 def test_get_caller_frame_info(create_module):
     @create_module
     def module():
-        from pydantic._internal._generics import _get_caller_frame_info
+        from pydantic2._internal._generics import _get_caller_frame_info
 
         def function():
             assert _get_caller_frame_info() == (__name__, True)
@@ -1085,7 +1085,7 @@ def test_get_caller_frame_info_called_from_module(create_module):
 
         import pytest
 
-        from pydantic._internal._generics import _get_caller_frame_info
+        from pydantic2._internal._generics import _get_caller_frame_info
 
         with pytest.raises(RuntimeError, match='This function must be used inside another function'):
             with patch('sys._getframe', side_effect=ValueError('getframe_exc')):
@@ -1093,7 +1093,7 @@ def test_get_caller_frame_info_called_from_module(create_module):
 
 
 def test_get_caller_frame_info_when_sys_getframe_undefined():
-    from pydantic._internal._generics import _get_caller_frame_info
+    from pydantic2._internal._generics import _get_caller_frame_info
 
     getframe = sys._getframe
     del sys._getframe
@@ -1587,7 +1587,7 @@ def test_generic_recursive_models(create_module):
     def module():
         from typing import Generic, TypeVar, Union
 
-        from pydantic import BaseModel
+        from pydantic2 import BaseModel
 
         T = TypeVar('T')
 
@@ -1638,7 +1638,7 @@ def test_generic_recursive_models_separate_parameters(create_module):
     def module():
         from typing import Generic, TypeVar, Union
 
-        from pydantic import BaseModel
+        from pydantic2 import BaseModel
 
         T = TypeVar('T')
 
@@ -1700,7 +1700,7 @@ def test_generic_recursive_models_repeated_separate_parameters(create_module):
     def module():
         from typing import Generic, TypeVar, Union
 
-        from pydantic import BaseModel
+        from pydantic2 import BaseModel
 
         T = TypeVar('T')
 
@@ -1756,7 +1756,7 @@ def test_generic_recursive_models_triple(create_module):
     def module():
         from typing import Generic, TypeVar, Union
 
-        from pydantic import BaseModel
+        from pydantic2 import BaseModel
 
         T1 = TypeVar('T1')
         T2 = TypeVar('T2')
@@ -1797,7 +1797,7 @@ def test_generic_recursive_models_with_a_concrete_parameter(create_module):
     def module():
         from typing import Generic, TypeVar, Union
 
-        from pydantic import BaseModel
+        from pydantic2 import BaseModel
 
         V1 = TypeVar('V1')
         V2 = TypeVar('V2')
@@ -1831,7 +1831,7 @@ def test_generic_recursive_models_complicated(create_module):
     def module():
         from typing import Generic, TypeVar, Union
 
-        from pydantic import BaseModel
+        from pydantic2 import BaseModel
 
         T1 = TypeVar('T1')
         T2 = TypeVar('T2')
@@ -1883,7 +1883,7 @@ def test_generic_recursive_models_in_container(create_module):
     def module():
         from typing import Generic, List, Optional, TypeVar
 
-        from pydantic import BaseModel
+        from pydantic2 import BaseModel
 
         T = TypeVar('T')
 

@@ -3,7 +3,7 @@ requires = ['hatchling', 'hatch-fancy-pypi-readme>=22.5.0']
 build-backend = 'hatchling.build'
 
 [tool.hatch.version]
-path = 'pydantic/version.py'
+path = 'pydantic2/version.py'
 
 [tool.hatch.metadata]
 allow-direct-references = true
@@ -15,13 +15,13 @@ include = [
     '/README.md',
     '/HISTORY.md',
     '/Makefile',
-    '/pydantic',
+    '/pydantic2',
     '/tests',
     '/requirements',
 ]
 
 [project]
-name = 'pydantic'
+name = 'pydantic2'
 description = 'Data validation using Python type hints'
 authors = [
     {name = 'Samuel Colvin', email = 's@muelcolvin.com'},

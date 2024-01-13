@@ -2057,7 +2057,7 @@ def _extract_get_pydantic_json_schema(tp: Any, schema: CoreSchema) -> GetJsonSch
     js_modify_function = getattr(tp, '__get_pydantic_json_schema__', None)
 
     if hasattr(tp, '__modify_schema__'):
-        from pydantic import BaseModel  # circular reference
+        from pydantic2 import BaseModel  # circular reference
 
         has_custom_v2_modify_js_func = (
             js_modify_function is not None

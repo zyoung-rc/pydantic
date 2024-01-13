@@ -14,7 +14,7 @@ from typing import Any, Container, Dict, List, Set, Union
 
 import yaml
 from github import Github
-from pydantic import BaseModel, SecretStr
+from pydantic2 import BaseModel, SecretStr
 from pydantic_settings import BaseSettings
 
 github_graphql_url = "https://api.github.com/graphql"

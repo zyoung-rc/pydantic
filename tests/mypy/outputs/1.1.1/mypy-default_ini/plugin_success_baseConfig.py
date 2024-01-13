@@ -1,7 +1,7 @@
 from typing import ClassVar, Generic, List, Optional, TypeVar, Union
 
-from pydantic import BaseModel, Field, create_model, field_validator
-from pydantic.dataclasses import dataclass
+from pydantic2 import BaseModel, Field, create_model, field_validator
+from pydantic2.dataclasses import dataclass
 
 
 class Model(BaseModel):

@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic2 import BaseModel
 
 
 class MyModel(BaseModel):

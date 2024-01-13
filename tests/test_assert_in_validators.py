@@ -7,7 +7,7 @@ import pprint
 import pytest
 from dirty_equals import HasRepr
 
-from pydantic import BaseModel, ValidationError, field_validator
+from pydantic2 import BaseModel, ValidationError, field_validator
 
 
 def _pformat_lines(obj):

@@ -4,7 +4,7 @@ import pytest
 from pydantic_core import PydanticCustomError, Url
 from typing_extensions import Annotated
 
-from pydantic import (
+from pydantic2 import (
     AmqpDsn,
     AnyUrl,
     BaseModel,
@@ -23,7 +23,7 @@ from pydantic import (
     UrlConstraints,
     ValidationError,
 )
-from pydantic.networks import validate_email
+from pydantic2.networks import validate_email
 
 try:
     import email_validator

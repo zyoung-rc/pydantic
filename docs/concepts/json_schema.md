@@ -49,8 +49,8 @@ from typing import Union
 
 from typing_extensions import Annotated
 
-from pydantic import BaseModel, Field
-from pydantic.config import ConfigDict
+from pydantic2 import BaseModel, Field
+from pydantic2.config import ConfigDict
 
 
 class FooBar(BaseModel):
@@ -170,11 +170,11 @@ Here's an example of generating JSON schema from a [`TypeAdapter`][pydantic.type
 ```py
 from typing import List
 
-from pydantic import TypeAdapter
+from pydantic2 import TypeAdapter
 
 adapter = TypeAdapter(List[int])
 print(adapter.json_schema())
-#> {'items': {'type': 'integer'}, 'type': 'array'}
+# > {'items': {'type': 'integer'}, 'type': 'array'}
 ```
 
 You can also generate JSON schemas for combinations of [`BaseModel`s][pydantic.main.BaseModel]
@@ -184,7 +184,7 @@ and [`TypeAdapter`s][pydantic.type_adapter.TypeAdapter], as shown in this exampl
 import json
 from typing import Union
 
-from pydantic import BaseModel, TypeAdapter
+from pydantic2 import BaseModel, TypeAdapter
 
 
 class Cat(BaseModel):
@@ -269,7 +269,7 @@ Here's an example of how to specify the `mode` parameter, and how it affects the
 ```py
 from decimal import Decimal
 
-from pydantic import BaseModel
+from pydantic2 import BaseModel
 
 
 class Model(BaseModel):
@@ -336,7 +336,7 @@ Here's an example:
 ```py output="json"
 import json
 
-from pydantic import BaseModel, EmailStr, Field, SecretStr
+from pydantic2 import BaseModel, EmailStr, Field, SecretStr
 
 
 class User(BaseModel):
@@ -403,7 +403,7 @@ constraint to appear in the schema, even though it's not being checked upon pars
 to [`Field`][pydantic.fields.Field] with the raw schema attribute name:
 
 ```py
-from pydantic import BaseModel, Field, PositiveInt
+from pydantic2 import BaseModel, Field, PositiveInt
 
 try:
     # this won't work since `PositiveInt` takes precedence over the
@@ -450,7 +450,7 @@ from uuid import uuid4
 
 from typing_extensions import Annotated
 
-from pydantic import BaseModel, Field
+from pydantic2 import BaseModel, Field
 
 
 class Foo(BaseModel):
@@ -504,7 +504,7 @@ You can pass a `dict` to `json_schema_extra` to add extra information to the JSO
 ```py output="json"
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic2 import BaseModel, ConfigDict
 
 
 class Model(BaseModel):
@@ -543,7 +543,7 @@ You can pass a `Callable` to `json_schema_extra` to modify the JSON schema with 
 ```py output="json"
 import json
 
-from pydantic import BaseModel, Field
+from pydantic2 import BaseModel, Field
 
 
 def pop_default(s):
@@ -596,7 +596,7 @@ import json
 
 from typing_extensions import Annotated
 
-from pydantic import BaseModel, PlainValidator, WithJsonSchema
+from pydantic2 import BaseModel, PlainValidator, WithJsonSchema
 
 MyInt = Annotated[
     int,
@@ -610,7 +610,7 @@ class Model(BaseModel):
 
 
 print(Model(a='1').a)
-#> 2
+# > 2
 
 print(json.dumps(Model.model_json_schema(), indent=2))
 """
@@ -669,7 +669,7 @@ from typing import Any, Dict, List, Type
 
 from pydantic_core import core_schema
 
-from pydantic import BaseModel, GetCoreSchemaHandler
+from pydantic2 import BaseModel, GetCoreSchemaHandler
 
 
 @dataclass
@@ -682,7 +682,7 @@ class CompressedString:
 
     @classmethod
     def __get_pydantic_core_schema__(
-        cls, source: Type[Any], handler: GetCoreSchemaHandler
+            cls, source: Type[Any], handler: GetCoreSchemaHandler
     ) -> core_schema.CoreSchema:
         assert source is CompressedString
         return core_schema.no_info_after_validator_function(
@@ -731,7 +731,7 @@ value = CompressedString(dictionary={0: 'fox', 1: 'dog'}, text=[0, 0, 0, 1, 0])
 """
 
 print(MyModel(value='fox fox fox dog fox').model_dump(mode='json'))
-#> {'value': 'fox fox fox dog fox'}
+# > {'value': 'fox fox fox dog fox'}
 ```
 
 Since Pydantic would not know how to generate a schema for `CompressedString`, if you call `handler(source)` in its
@@ -748,7 +748,7 @@ from typing import Any, Sequence, Type
 from pydantic_core import core_schema
 from typing_extensions import Annotated
 
-from pydantic import BaseModel, GetCoreSchemaHandler, ValidationError
+from pydantic2 import BaseModel, GetCoreSchemaHandler, ValidationError
 
 
 @dataclass
@@ -756,7 +756,7 @@ class RestrictCharacters:
     alphabet: Sequence[str]
 
     def __get_pydantic_core_schema__(
-        self, source: Type[Any], handler: GetCoreSchemaHandler
+            self, source: Type[Any], handler: GetCoreSchemaHandler
     ) -> core_schema.CoreSchema:
         if not self.alphabet:
             raise ValueError('Alphabet may not be empty')
@@ -792,7 +792,7 @@ print(MyModel.model_json_schema())
 }
 """
 print(MyModel(value='CBA'))
-#> value='CBA'
+# > value='CBA'
 
 try:
     MyModel(value='XYZ')
@@ -815,14 +815,14 @@ from typing import Any, Type
 from pydantic_core import ValidationError, core_schema
 from typing_extensions import Annotated
 
-from pydantic import BaseModel, GetCoreSchemaHandler
+from pydantic2 import BaseModel, GetCoreSchemaHandler
 
 
 class SmallString:
     def __get_pydantic_core_schema__(
-        self,
-        source: Type[Any],
-        handler: GetCoreSchemaHandler,
+            self,
+            source: Type[Any],
+            handler: GetCoreSchemaHandler,
     ) -> core_schema.CoreSchema:
         schema = handler(source)
         assert schema['type'] == 'str'
@@ -857,12 +857,12 @@ from typing import Any, Type
 from pydantic_core import ValidationError, core_schema
 from typing_extensions import Annotated
 
-from pydantic import BaseModel, GetCoreSchemaHandler
+from pydantic2 import BaseModel, GetCoreSchemaHandler
 
 
 class AllowAnySubclass:
     def __get_pydantic_core_schema__(
-        self, source: Type[Any], handler: GetCoreSchemaHandler
+            self, source: Type[Any], handler: GetCoreSchemaHandler
     ) -> core_schema.CoreSchema:
         # we can't call handler since it will fail for arbitrary types
         def validate(value: Any) -> Any:
@@ -883,7 +883,9 @@ class Model(BaseModel):
 
 
 print(Model(f=Foo()))
-#> f=None
+
+
+# > f=None
 
 
 class NotFoo:
@@ -912,7 +914,7 @@ from typing import Type
 from pydantic_core import CoreSchema
 from typing_extensions import Annotated
 
-from pydantic import BaseModel, GetCoreSchemaHandler
+from pydantic2 import BaseModel, GetCoreSchemaHandler
 
 
 class Metadata(BaseModel):
@@ -921,7 +923,7 @@ class Metadata(BaseModel):
 
     @classmethod
     def __get_pydantic_core_schema__(
-        cls, source_type: Type[BaseModel], handler: GetCoreSchemaHandler
+            cls, source_type: Type[BaseModel], handler: GetCoreSchemaHandler
     ) -> CoreSchema:
         if cls is not source_type:
             return handler(source_type)
@@ -960,8 +962,8 @@ from typing import Any
 
 from pydantic_core import core_schema
 
-from pydantic import GetCoreSchemaHandler, GetJsonSchemaHandler, TypeAdapter
-from pydantic.json_schema import JsonSchemaValue
+from pydantic2 import GetCoreSchemaHandler, GetJsonSchemaHandler, TypeAdapter
+from pydantic2.json_schema import JsonSchemaValue
 
 
 class Person:
@@ -974,7 +976,7 @@ class Person:
 
     @classmethod
     def __get_pydantic_core_schema__(
-        cls, source_type: Any, handler: GetCoreSchemaHandler
+            cls, source_type: Any, handler: GetCoreSchemaHandler
     ) -> core_schema.CoreSchema:
         return core_schema.typed_dict_schema(
             {
@@ -985,7 +987,7 @@ class Person:
 
     @classmethod
     def __get_pydantic_json_schema__(
-        cls, core_schema: core_schema.CoreSchema, handler: GetJsonSchemaHandler
+            cls, core_schema: core_schema.CoreSchema, handler: GetJsonSchemaHandler
     ) -> JsonSchemaValue:
         json_schema = handler(core_schema)
         json_schema = handler.resolve_ref_schema(json_schema)
@@ -1052,8 +1054,8 @@ sub-models in its `$defs`:
 ```py output="json"
 import json
 
-from pydantic import BaseModel
-from pydantic.json_schema import models_json_schema
+from pydantic2 import BaseModel
+from pydantic2.json_schema import models_json_schema
 
 
 class Foo(BaseModel):
@@ -1132,8 +1134,8 @@ By design, this class breaks the JSON schema generation process into smaller met
 subclasses to modify the "global" approach to generating JSON schema.
 
 ```py
-from pydantic import BaseModel
-from pydantic.json_schema import GenerateJsonSchema
+from pydantic2 import BaseModel
+from pydantic2.json_schema import GenerateJsonSchema
 
 
 class MyGenerateJsonSchema(GenerateJsonSchema):
@@ -1167,13 +1169,13 @@ from typing import Callable
 
 from pydantic_core import PydanticOmit, core_schema
 
-from pydantic import BaseModel
-from pydantic.json_schema import GenerateJsonSchema, JsonSchemaValue
+from pydantic2 import BaseModel
+from pydantic2.json_schema import GenerateJsonSchema, JsonSchemaValue
 
 
 class MyGenerateJsonSchema(GenerateJsonSchema):
     def handle_invalid_for_json_schema(
-        self, schema: core_schema.CoreSchema, error_info: str
+            self, schema: core_schema.CoreSchema, error_info: str
     ) -> JsonSchemaValue:
         raise PydanticOmit
 
@@ -1215,8 +1217,8 @@ This is useful if you need to extend or modify the JSON schema default definitio
 ```py output="json"
 import json
 
-from pydantic import BaseModel
-from pydantic.type_adapter import TypeAdapter
+from pydantic2 import BaseModel
+from pydantic2.type_adapter import TypeAdapter
 
 
 class Foo(BaseModel):

@@ -15,7 +15,7 @@ and will instead error if the data is not of the correct type.
 Here is a brief example showing the difference between validation behavior in strict and the default/"lax" mode:
 
 ```py
-from pydantic import BaseModel, ValidationError
+from pydantic2 import BaseModel, ValidationError
 
 
 class MyModel(BaseModel):
@@ -23,7 +23,7 @@ class MyModel(BaseModel):
 
 
 print(MyModel.model_validate({'x': '123'}))  # lax mode
-#> x=123
+# > x=123
 
 try:
     MyModel.model_validate({'x': '123'}, strict=True)  # strict mode
@@ -57,7 +57,7 @@ instances of `str` will be accepted when validating from JSON, but not from pyth
 import json
 from uuid import UUID
 
-from pydantic import BaseModel, ValidationError
+from pydantic2 import BaseModel, ValidationError
 
 
 class MyModel(BaseModel):
@@ -67,12 +67,12 @@ class MyModel(BaseModel):
 data = {'guid': '12345678-1234-1234-1234-123456789012'}
 
 print(MyModel.model_validate(data))  # OK: lax
-#> guid=UUID('12345678-1234-1234-1234-123456789012')
+# > guid=UUID('12345678-1234-1234-1234-123456789012')
 
 print(
     MyModel.model_validate_json(json.dumps(data), strict=True)
 )  # OK: strict, but from json
-#> guid=UUID('12345678-1234-1234-1234-123456789012')
+# > guid=UUID('12345678-1234-1234-1234-123456789012')
 
 try:
     MyModel.model_validate(data, strict=True)  # Not OK: strict, from python
@@ -101,10 +101,10 @@ the validation methods. While we have shown this for `BaseModel.model_validate`,
 through the use of `TypeAdapter`:
 
 ```python
-from pydantic import TypeAdapter, ValidationError
+from pydantic2 import TypeAdapter, ValidationError
 
 print(TypeAdapter(bool).validate_python('yes'))  # OK: lax
-#> True
+# > True
 
 try:
     TypeAdapter(bool).validate_python('yes', strict=True)  # Not OK: strict
@@ -117,10 +117,11 @@ except ValidationError as exc:
 ```
 
 Note this also works even when using more "complex" types in `TypeAdapter`:
+
 ```python
 from dataclasses import dataclass
 
-from pydantic import TypeAdapter, ValidationError
+from pydantic2 import TypeAdapter, ValidationError
 
 
 @dataclass
@@ -145,7 +146,7 @@ import json
 from typing import List
 from uuid import UUID
 
-from pydantic import BaseModel, TypeAdapter, ValidationError
+from pydantic2 import BaseModel, TypeAdapter, ValidationError
 
 try:
     TypeAdapter(List[int]).validate_json('["1", 2, "3"]', strict=True)
@@ -202,7 +203,7 @@ This will cause strict-mode validation to be used for that field, even when the 
 Only the fields for which `strict=True` is set will be affected:
 
 ```python
-from pydantic import BaseModel, Field, ValidationError
+from pydantic2 import BaseModel, Field, ValidationError
 
 
 class User(BaseModel):
@@ -213,7 +214,9 @@ class User(BaseModel):
 
 user = User(name='John', age='42', n_pets='1')
 print(user)
-#> name='John' age=42 n_pets=1
+
+
+# > name='John' age=42 n_pets=1
 
 
 class AnotherUser(BaseModel):
@@ -236,7 +239,7 @@ except ValidationError as e:
 Note that making fields strict will also affect the validation performed when instantiating the model class:
 
 ```python
-from pydantic import BaseModel, Field, ValidationError
+from pydantic2 import BaseModel, Field, ValidationError
 
 
 class Model(BaseModel):
@@ -263,7 +266,7 @@ when working with `TypedDict`:
 ```python
 from typing_extensions import Annotated, TypedDict
 
-from pydantic import Field, TypeAdapter, ValidationError
+from pydantic2 import Field, TypeAdapter, ValidationError
 
 
 class MyDict(TypedDict):
@@ -293,7 +296,7 @@ strict mode:
 ```python
 from typing_extensions import Annotated
 
-from pydantic import BaseModel, Strict, ValidationError
+from pydantic2 import BaseModel, Strict, ValidationError
 
 
 class User(BaseModel):
@@ -325,7 +328,7 @@ If you want to enable strict mode for all fields on a complex input type, you ca
 [`ConfigDict(strict=True)`](../api/config.md#pydantic.config.ConfigDict) in the `model_config`:
 
 ```py
-from pydantic import BaseModel, ConfigDict, ValidationError
+from pydantic2 import BaseModel, ConfigDict, ValidationError
 
 
 class User(BaseModel):
@@ -367,7 +370,7 @@ except ValidationError as exc:
 Note that strict mode is not recursively applied to nested model fields:
 
 ```python
-from pydantic import BaseModel, ConfigDict, ValidationError
+from pydantic2 import BaseModel, ConfigDict, ValidationError
 
 
 class Inner(BaseModel):
@@ -402,7 +405,7 @@ For example, this can be done for model classes by using a shared base class wit
 `model_config = ConfigDict(strict=True)`:
 
 ```python
-from pydantic import BaseModel, ConfigDict, ValidationError
+from pydantic2 import BaseModel, ConfigDict, ValidationError
 
 
 class MyBaseModel(BaseModel):
@@ -443,7 +446,7 @@ should use for the type by setting the `__pydantic_config__` attribute on the ty
 ```python
 from typing_extensions import TypedDict
 
-from pydantic import ConfigDict, TypeAdapter, ValidationError
+from pydantic2 import ConfigDict, TypeAdapter, ValidationError
 
 
 class Inner(TypedDict):
@@ -480,7 +483,7 @@ You can also get strict mode through the use of the config keyword argument to t
 [`TypeAdapter`](../api/types.md#pydantic.types.TypeAdapter) class:
 
 ```python
-from pydantic import ConfigDict, TypeAdapter, ValidationError
+from pydantic2 import ConfigDict, TypeAdapter, ValidationError
 
 adapter = TypeAdapter(bool, config=ConfigDict(strict=True))
 
@@ -500,7 +503,7 @@ Strict mode is also usable with the [`@validate_call`](../api/validate_call.md#p
 decorator by passing the `config` keyword argument:
 
 ```python
-from pydantic import ConfigDict, ValidationError, validate_call
+from pydantic2 import ConfigDict, ValidationError, validate_call
 
 
 @validate_call(config=ConfigDict(strict=True))

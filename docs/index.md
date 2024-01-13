@@ -20,7 +20,7 @@ Fast and extensible, Pydantic plays nicely with your linters/IDE/brain. Define h
 from datetime import datetime
 from typing import Tuple
 
-from pydantic import BaseModel
+from pydantic2 import BaseModel
 
 
 class Delivery(BaseModel):
@@ -30,9 +30,9 @@ class Delivery(BaseModel):
 
 m = Delivery(timestamp='2020-01-02T03:04:05Z', dimensions=['10', '20'])
 print(repr(m.timestamp))
-#> datetime.datetime(2020, 1, 2, 3, 4, 5, tzinfo=TzInfo(UTC))
+# > datetime.datetime(2020, 1, 2, 3, 4, 5, tzinfo=TzInfo(UTC))
 print(m.dimensions)
-#> (10, 20)
+# > (10, 20)
 ```
 
 ## Why use Pydantic?
@@ -56,7 +56,7 @@ To see Pydantic at work, let's start with a simple example, creating a custom cl
 ```py upgrade="skip" title="Validation Successful" requires="3.10"
 from datetime import datetime
 
-from pydantic import BaseModel, PositiveInt
+from pydantic2 import BaseModel, PositiveInt
 
 
 class User(BaseModel):
@@ -79,7 +79,7 @@ external_data = {
 user = User(**external_data)  # (8)!
 
 print(user.id)  # (9)!
-#> 123
+# > 123
 print(user.model_dump())  # (10)!
 """
 {
@@ -109,7 +109,7 @@ If validation fails, Pydantic will raise an error with a breakdown of what was w
 ```py upgrade="skip" title="Validation Error" test="skip" lint="skip"
 # continuing the above example...
 
-from pydantic import ValidationError
+from pydantic2 import ValidationError
 
 
 class User(BaseModel):

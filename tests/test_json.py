@@ -14,7 +14,7 @@ import pytest
 from pydantic_core import CoreSchema, SchemaSerializer, core_schema
 from typing_extensions import Annotated
 
-from pydantic import (
+from pydantic2 import (
     AfterValidator,
     BaseModel,
     ConfigDict,
@@ -23,17 +23,17 @@ from pydantic import (
     NameEmail,
     PlainSerializer,
 )
-from pydantic._internal._config import ConfigWrapper
-from pydantic._internal._generate_schema import GenerateSchema
-from pydantic.color import Color
-from pydantic.dataclasses import dataclass as pydantic_dataclass
-from pydantic.deprecated.json import pydantic_encoder, timedelta_isoformat
-from pydantic.functional_serializers import (
+from pydantic2._internal._config import ConfigWrapper
+from pydantic2._internal._generate_schema import GenerateSchema
+from pydantic2.color import Color
+from pydantic2.dataclasses import dataclass as pydantic_dataclass
+from pydantic2.deprecated.json import pydantic_encoder, timedelta_isoformat
+from pydantic2.functional_serializers import (
     field_serializer,
 )
-from pydantic.json_schema import JsonSchemaValue
-from pydantic.type_adapter import TypeAdapter
-from pydantic.types import DirectoryPath, FilePath, SecretBytes, SecretStr, condecimal
+from pydantic2.json_schema import JsonSchemaValue
+from pydantic2.type_adapter import TypeAdapter
+from pydantic2.types import DirectoryPath, FilePath, SecretBytes, SecretStr, condecimal
 
 try:
     import email_validator
@@ -354,7 +354,7 @@ def test_recursive(create_module):
         """
 from __future__ import annotations
 from typing import Optional
-from pydantic import BaseModel
+from pydantic2 import BaseModel
 
 class Model(BaseModel):
     value: int

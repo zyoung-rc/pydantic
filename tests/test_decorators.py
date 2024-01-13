@@ -1,7 +1,7 @@
 import pytest
 
-from pydantic import PydanticUserError
-from pydantic._internal._decorators import inspect_annotated_serializer, inspect_validator
+from pydantic2 import PydanticUserError
+from pydantic2._internal._decorators import inspect_annotated_serializer, inspect_validator
 
 
 def test_inspect_validator_error_wrap():

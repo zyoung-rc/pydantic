@@ -29,7 +29,7 @@ If validation fails on all members, the validation error includes the errors fro
 ```py title="Union with left to right mode"
 from typing import Union
 
-from pydantic import BaseModel, Field, ValidationError
+from pydantic2 import BaseModel, Field, ValidationError
 
 
 class User(BaseModel):
@@ -37,9 +37,9 @@ class User(BaseModel):
 
 
 print(User(id=123))
-#> id=123
+# > id=123
 print(User(id='hello'))
-#> id='hello'
+# > id='hello'
 
 try:
     User(id=[])
@@ -59,7 +59,7 @@ The order of members is very important in this case, as demonstrated by tweak th
 ```py title="Union with left to right - unexpected results"
 from typing import Union
 
-from pydantic import BaseModel, Field
+from pydantic2 import BaseModel, Field
 
 
 class User(BaseModel):
@@ -67,9 +67,9 @@ class User(BaseModel):
 
 
 print(User(id=123))  # (1)
-#> id=123
+# > id=123
 print(User(id='456'))  # (2)
-#> id=456
+# > id=456
 ```
 
 1. As expected the input is validated against the `int` member and the result is as expected.
@@ -100,7 +100,7 @@ In this mode, the following steps are taken to try to select the best match for 
 from typing import Union
 from uuid import UUID
 
-from pydantic import BaseModel
+from pydantic2 import BaseModel
 
 
 class User(BaseModel):
@@ -110,22 +110,22 @@ class User(BaseModel):
 
 user_01 = User(id=123, name='John Doe')
 print(user_01)
-#> id=123 name='John Doe'
+# > id=123 name='John Doe'
 print(user_01.id)
-#> 123
+# > 123
 user_02 = User(id='1234', name='John Doe')
 print(user_02)
-#> id='1234' name='John Doe'
+# > id='1234' name='John Doe'
 print(user_02.id)
-#> 1234
+# > 1234
 user_03_uuid = UUID('cf57432e-809e-4353-adbd-9d5c0d733868')
 user_03 = User(id=user_03_uuid, name='John Doe')
 print(user_03)
-#> id=UUID('cf57432e-809e-4353-adbd-9d5c0d733868') name='John Doe'
+# > id=UUID('cf57432e-809e-4353-adbd-9d5c0d733868') name='John Doe'
 print(user_03.id)
-#> cf57432e-809e-4353-adbd-9d5c0d733868
+# > cf57432e-809e-4353-adbd-9d5c0d733868
 print(user_03_uuid.int)
-#> 275603287559914445491632874575877060712
+# > 275603287559914445491632874575877060712
 ```
 
 !!! tip
@@ -157,7 +157,7 @@ For your `Union`, you can set the discriminator in its value: `Field(discriminat
 ```py requires="3.8"
 from typing import Literal, Union
 
-from pydantic import BaseModel, Field, ValidationError
+from pydantic2 import BaseModel, Field, ValidationError
 
 
 class Cat(BaseModel):
@@ -207,7 +207,7 @@ from typing import Any, Literal, Union
 
 from typing_extensions import Annotated
 
-from pydantic import BaseModel, Discriminator, Tag
+from pydantic2 import BaseModel, Discriminator, Tag
 
 
 class Pie(BaseModel):
@@ -271,7 +271,7 @@ from typing import Any, Union
 
 from typing_extensions import Annotated
 
-from pydantic import BaseModel, Discriminator, Tag, ValidationError
+from pydantic2 import BaseModel, Discriminator, Tag, ValidationError
 
 
 def model_x_discriminator(v: Any) -> str:
@@ -357,7 +357,7 @@ from typing import Literal, Union
 
 from typing_extensions import Annotated
 
-from pydantic import BaseModel, Field, ValidationError
+from pydantic2 import BaseModel, Field, ValidationError
 
 
 class BlackCat(BaseModel):
@@ -428,7 +428,7 @@ from typing import Union
 
 from typing_extensions import Annotated
 
-from pydantic import BaseModel, Discriminator, Tag, ValidationError
+from pydantic2 import BaseModel, Discriminator, Tag, ValidationError
 
 
 # Errors are quite verbose with a normal Union:
@@ -531,11 +531,10 @@ from typing import Dict, List, Union
 
 from typing_extensions import Annotated
 
-from pydantic import AfterValidator, Tag, TypeAdapter, ValidationError
+from pydantic2 import AfterValidator, Tag, TypeAdapter, ValidationError
 
 DoubledList = Annotated[List[int], AfterValidator(lambda x: x * 2)]
 StringsMap = Dict[str, str]
-
 
 # Not using any `Tag`s for each union case, the errors are not so nice to look at
 adapter = TypeAdapter(Union[DoubledList, StringsMap])

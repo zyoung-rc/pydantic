@@ -10,7 +10,7 @@ You can use the [`field_serializer`][pydantic.functional_serializers.field_seria
 secret as plain-text when serializing to json.
 
 ```py
-from pydantic import BaseModel, SecretBytes, SecretStr, field_serializer
+from pydantic2 import BaseModel, SecretBytes, SecretStr, field_serializer
 
 
 class Model(BaseModel):
@@ -24,9 +24,9 @@ class Model(BaseModel):
 
 model = Model(password='IAmSensitive', password_bytes=b'IAmSensitiveBytes')
 print(model)
-#> password=SecretStr('**********') password_bytes=SecretBytes(b'**********')
+# > password=SecretStr('**********') password_bytes=SecretBytes(b'**********')
 print(model.password)
-#> **********
+# > **********
 print(model.model_dump())
 """
 {
@@ -35,5 +35,5 @@ print(model.model_dump())
 }
 """
 print(model.model_dump_json())
-#> {"password":"IAmSensitive","password_bytes":"IAmSensitiveBytes"}
+# > {"password":"IAmSensitive","password_bytes":"IAmSensitiveBytes"}
 ```

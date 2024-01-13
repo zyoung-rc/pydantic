@@ -2,8 +2,8 @@ import re
 
 import pytest
 
-from pydantic import BaseModel, PydanticUserError, ValidationError
-from pydantic.version import version_short
+from pydantic2 import BaseModel, PydanticUserError, ValidationError
+from pydantic2.version import version_short
 
 
 def test_user_error_url():

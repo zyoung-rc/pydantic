@@ -7,7 +7,7 @@ import pytest
 from pydantic_core import ValidationError, core_schema
 from typing_extensions import TypedDict
 
-from pydantic import (
+from pydantic2 import (
     BaseModel,
     Field,
     GetCoreSchemaHandler,
@@ -18,8 +18,8 @@ from pydantic import (
     field_serializer,
     field_validator,
 )
-from pydantic.alias_generators import to_camel
-from pydantic.errors import PydanticUserError
+from pydantic2.alias_generators import to_camel
+from pydantic2.errors import PydanticUserError
 
 try:
     from functools import cached_property, lru_cache, singledispatchmethod

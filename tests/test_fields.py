@@ -1,7 +1,7 @@
 import pytest
 
-import pydantic.dataclasses
-from pydantic import BaseModel, Field, RootModel, ValidationError, fields
+import pydantic2.dataclasses
+from pydantic2 import BaseModel, Field, RootModel, ValidationError, fields
 
 
 def test_field_info_annotation_keyword_argument():
@@ -18,7 +18,7 @@ def test_field_info_annotation_keyword_argument():
 
 
 def test_init_var_field():
-    @pydantic.dataclasses.dataclass
+    @pydantic2.dataclasses.dataclass
     class Foo:
         bar: str
         baz: str = Field(init_var=True)

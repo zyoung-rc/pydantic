@@ -8,7 +8,7 @@ def test_match_kwargs(create_module):
     module = create_module(
         # language=Python
         """
-from pydantic import BaseModel
+from pydantic2 import BaseModel
 
 class Model(BaseModel):
     a: str

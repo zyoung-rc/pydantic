@@ -42,7 +42,7 @@ from dirty_equals import HasRepr, IsFloatNan, IsOneOf, IsStr
 from pydantic_core import CoreSchema, PydanticCustomError, SchemaError, core_schema
 from typing_extensions import Annotated, Literal, NotRequired, TypedDict, get_args
 
-from pydantic import (
+from pydantic2 import (
     UUID1,
     UUID3,
     UUID4,
@@ -113,7 +113,7 @@ from pydantic import (
     field_validator,
     validate_call,
 )
-from pydantic.dataclasses import dataclass as pydantic_dataclass
+from pydantic2.dataclasses import dataclass as pydantic_dataclass
 
 try:
     import email_validator

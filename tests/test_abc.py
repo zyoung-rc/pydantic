@@ -3,7 +3,7 @@ import sys
 
 import pytest
 
-from pydantic import BaseModel
+from pydantic2 import BaseModel
 
 
 def test_model_subclassing_abstract_base_classes():

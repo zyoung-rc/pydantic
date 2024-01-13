@@ -17,7 +17,7 @@ from typing import List
 
 from typing_extensions import TypedDict
 
-from pydantic import TypeAdapter, ValidationError
+from pydantic2 import TypeAdapter, ValidationError
 
 
 class User(TypedDict):
@@ -27,7 +27,7 @@ class User(TypedDict):
 
 UserListAdapter = TypeAdapter(List[User])
 print(repr(UserListAdapter.validate_python([{'name': 'Fred', 'id': '3'}])))
-#> [{'name': 'Fred', 'id': 3}]
+# > [{'name': 'Fred', 'id': 3}]
 
 try:
     UserListAdapter.validate_python(
@@ -60,7 +60,7 @@ This is especially useful when you want to parse results into a type that is not
 ```py
 from typing import List
 
-from pydantic import BaseModel, TypeAdapter
+from pydantic2 import BaseModel, TypeAdapter
 
 
 class Item(BaseModel):
@@ -74,7 +74,7 @@ item_data = [{'id': 1, 'name': 'My Item'}]
 
 items = TypeAdapter(List[Item]).validate_python(item_data)
 print(items)
-#> [Item(id=1, name='My Item')]
+# > [Item(id=1, name='My Item')]
 ```
 
 [`TypeAdapter`][pydantic.type_adapter.TypeAdapter] is capable of parsing data into any of the types Pydantic can

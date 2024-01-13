@@ -2679,7 +2679,7 @@ class Discriminator:
             raise TypeError(f'{type(self).__name__} must be used with a Union type, not {source_type}')
 
         if isinstance(self.discriminator, str):
-            from pydantic import Field
+            from pydantic2 import Field
 
             return handler(Annotated[source_type, Field(discriminator=self.discriminator)])
         else:

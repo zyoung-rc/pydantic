@@ -30,7 +30,7 @@ import pytest
 from pydantic_core import CoreSchema, core_schema
 from typing_extensions import Annotated, Literal
 
-from pydantic import (
+from pydantic2 import (
     AfterValidator,
     BaseModel,
     ConfigDict,
@@ -1116,7 +1116,7 @@ def test_dict_with_extra_keys():
 
 
 def test_ignored_types():
-    from pydantic import BaseModel
+    from pydantic2 import BaseModel
 
     class _ClassPropertyDescriptor:
         def __init__(self, getter):
@@ -2568,7 +2568,7 @@ def test_model_get_core_schema() -> None:
 
 
 def test_nested_types_ignored():
-    from pydantic import BaseModel
+    from pydantic2 import BaseModel
 
     class NonNestedType:
         pass
@@ -2982,7 +2982,7 @@ def test_help(create_module):
         """
 import pydoc
 
-from pydantic import BaseModel
+from pydantic2 import BaseModel
 
 class Model(BaseModel):
     x: int

@@ -5,8 +5,8 @@ from typing import Callable, ClassVar, ForwardRef, NamedTuple
 import pytest
 from typing_extensions import Literal, get_origin
 
-from pydantic import Field  # noqa: F401
-from pydantic._internal._typing_extra import (
+from pydantic2 import Field  # noqa: F401
+from pydantic2._internal._typing_extra import (
     NoneType,
     get_function_type_hints,
     is_classvar,

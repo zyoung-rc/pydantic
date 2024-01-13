@@ -134,7 +134,7 @@ def expand_grouped_metadata(annotations: Iterable[Any]) -> Iterable[Any]:
     """
     import annotated_types as at
 
-    from pydantic.fields import FieldInfo  # circular import
+    from pydantic2.fields import FieldInfo  # circular import
 
     for annotation in annotations:
         if isinstance(annotation, at.GroupedMetadata):

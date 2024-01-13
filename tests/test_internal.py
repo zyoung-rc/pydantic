@@ -7,14 +7,14 @@ import pytest
 from pydantic_core import CoreSchema, SchemaValidator
 from pydantic_core import core_schema as cs
 
-from pydantic._internal._core_utils import (
+from pydantic2._internal._core_utils import (
     HAS_INVALID_SCHEMAS_METADATA_KEY,
     Walk,
     collect_invalid_schemas,
     simplify_schema_references,
     walk_core_schema,
 )
-from pydantic._internal._repr import Representation
+from pydantic2._internal._repr import Representation
 
 
 def remove_metadata(schema: CoreSchema) -> CoreSchema:

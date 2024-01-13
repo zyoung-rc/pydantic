@@ -14,12 +14,12 @@ from typing import Any, List
 
 from typing_extensions import Annotated
 
-from pydantic import BaseModel, ValidationError
-from pydantic.functional_validators import AfterValidator
+from pydantic2 import BaseModel, ValidationError
+from pydantic2.functional_validators import AfterValidator
 
 
 def check_squares(v: int) -> int:
-    assert v**0.5 % 1 == 0, f'{v} is not a square number'
+    assert v ** 0.5 % 1 == 0, f'{v} is not a square number'
     return v
 
 
@@ -35,7 +35,7 @@ class DemoModel(BaseModel):
 
 
 print(DemoModel(number=[2, 8]))
-#> number=[4, 16]
+# > number=[4, 16]
 try:
     DemoModel(number=[2, 4])
 except ValidationError as e:
@@ -77,17 +77,17 @@ from typing import Any, List
 
 from typing_extensions import Annotated
 
-from pydantic import (
+from pydantic2 import (
     BaseModel,
     ValidationError,
     ValidationInfo,
     ValidatorFunctionWrapHandler,
 )
-from pydantic.functional_validators import WrapValidator
+from pydantic2.functional_validators import WrapValidator
 
 
 def maybe_strip_whitespace(
-    v: Any, handler: ValidatorFunctionWrapHandler, info: ValidationInfo
+        v: Any, handler: ValidatorFunctionWrapHandler, info: ValidationInfo
 ) -> int:
     if info.mode == 'json':
         assert isinstance(v, str), 'In JSON mode the input must be a string!'
@@ -110,9 +110,9 @@ class DemoModel(BaseModel):
 
 
 print(DemoModel(number=[2, 8]))
-#> number=[2, 8]
+# > number=[2, 8]
 print(DemoModel.model_validate_json(json.dumps({'number': [' 2 ', '8']})))
-#> number=[2, 8]
+# > number=[2, 8]
 try:
     DemoModel(number=['2'])
 except ValidationError as e:
@@ -139,7 +139,7 @@ from typing import Any, Callable, List, cast
 
 from typing_extensions import Annotated, TypedDict
 
-from pydantic import (
+from pydantic2 import (
     AfterValidator,
     BaseModel,
     BeforeValidator,
@@ -148,7 +148,7 @@ from pydantic import (
     ValidatorFunctionWrapHandler,
     WrapValidator,
 )
-from pydantic.functional_validators import field_validator
+from pydantic2.functional_validators import field_validator
 
 
 class Context(TypedDict):
@@ -165,10 +165,10 @@ def make_validator(label: str) -> Callable[[str, ValidationInfo], str]:
 
 
 def make_wrap_validator(
-    label: str,
+        label: str,
 ) -> Callable[[str, ValidatorFunctionWrapHandler, ValidationInfo], str]:
     def validator(
-        v: Any, handler: ValidatorFunctionWrapHandler, info: ValidationInfo
+            v: Any, handler: ValidatorFunctionWrapHandler, info: ValidationInfo
     ) -> Any:
         context = cast(Context, info.context)
         context['logs'].append(f'{label}: pre')
@@ -268,11 +268,10 @@ Validators won't run when the default value is used.
 This applies both to `@field_validator` validators and `Annotated` validators.
 You can force them to run with `Field(validate_default=True)`. Setting `validate_default` to `True` has the closest behavior to using `always=True` in `validator` in Pydantic v1. However, you are generally better off using a `@model_validator(mode='before')` where the function is called before the inner validator is called.
 
-
 ```py
 from typing_extensions import Annotated
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic2 import BaseModel, Field, field_validator
 
 
 class Model(BaseModel):
@@ -286,13 +285,13 @@ class Model(BaseModel):
 
 
 print(Model())
-#> x='abc' y='xyzxyz'
+# > x='abc' y='xyzxyz'
 print(Model(x='foo'))
-#> x='foofoo' y='xyzxyz'
+# > x='foofoo' y='xyzxyz'
 print(Model(x='abc'))
-#> x='abcabc' y='xyzxyz'
+# > x='abcabc' y='xyzxyz'
 print(Model(x='foo', y='bar'))
-#> x='foofoo' y='barbar'
+# > x='foofoo' y='barbar'
 ```
 
 ## Field validators
@@ -303,7 +302,7 @@ print(Model(x='foo', y='bar'))
 If you want to attach a validator to a specific field of a model you can use the `@field_validator` decorator.
 
 ```py
-from pydantic import (
+from pydantic2 import (
     BaseModel,
     ValidationError,
     ValidationInfo,
@@ -400,7 +399,7 @@ Validation can also be performed on the entire model's data using `@model_valida
 ```py
 from typing import Any
 
-from pydantic import BaseModel, ValidationError, model_validator
+from pydantic2 import BaseModel, ValidationError, model_validator
 
 
 class UserModel(BaseModel):
@@ -413,7 +412,7 @@ class UserModel(BaseModel):
     def check_card_number_omitted(cls, data: Any) -> Any:
         if isinstance(data, dict):
             assert (
-                'card_number' not in data
+                    'card_number' not in data
             ), 'card_number should not be included'
         return data
 
@@ -474,7 +473,7 @@ Any other errors (including `TypeError`) are bubbled up and not wrapped in a `Va
 ```python
 from pydantic_core import PydanticCustomError
 
-from pydantic import BaseModel, ValidationError, field_validator
+from pydantic2 import BaseModel, ValidationError, field_validator
 
 
 class Model(BaseModel):
@@ -512,7 +511,7 @@ Pydantic provides a few special types that can be used to customize validation.
 ```py
 from typing import List
 
-from pydantic import BaseModel, InstanceOf, ValidationError
+from pydantic2 import BaseModel, InstanceOf, ValidationError
 
 
 class Fruit:
@@ -550,7 +549,7 @@ except ValidationError as e:
 ```py
 from typing import List
 
-from pydantic import BaseModel, SkipValidation
+from pydantic2 import BaseModel, SkipValidation
 
 
 class Model(BaseModel):
@@ -583,8 +582,8 @@ the validator.
 Validators also work with Pydantic dataclasses.
 
 ```py
-from pydantic import field_validator
-from pydantic.dataclasses import dataclass
+from pydantic2 import field_validator
+from pydantic2.dataclasses import dataclass
 
 
 @dataclass
@@ -611,7 +610,7 @@ You can pass a context object to the validation methods which can be accessed fr
 argument to decorated validator functions:
 
 ```python
-from pydantic import BaseModel, ValidationInfo, field_validator
+from pydantic2 import BaseModel, ValidationInfo, field_validator
 
 
 class Model(BaseModel):
@@ -643,7 +642,7 @@ by context, and having a separate mechanism for updating what is allowed:
 ```python
 from typing import Any, Dict, List
 
-from pydantic import (
+from pydantic2 import (
     BaseModel,
     ValidationError,
     ValidationInfo,
@@ -709,7 +708,7 @@ from contextlib import contextmanager
 from contextvars import ContextVar
 from typing import Any, Dict, Iterator
 
-from pydantic import BaseModel, ValidationInfo, field_validator
+from pydantic2 import BaseModel, ValidationInfo, field_validator
 
 _init_context_var = ContextVar('_init_context_var', default=None)
 

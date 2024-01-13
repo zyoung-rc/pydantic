@@ -1,6 +1,6 @@
 from typing import List
 
-from pydantic import RootModel
+from pydantic2 import RootModel
 
 
 class Pets1(RootModel[List[str]]):

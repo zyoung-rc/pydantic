@@ -6,7 +6,7 @@ pytestmark = pytest.mark.skipif(not os.getenv('TEST_PLUGIN'), reason='Test only 
 
 
 def test_plugin_usage():
-    from pydantic import BaseModel
+    from pydantic2 import BaseModel
 
     class MyModel(BaseModel):
         x: int

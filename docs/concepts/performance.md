@@ -56,7 +56,7 @@ If you don't need to validate a value, use `Any` to keep the value unchanged.
 ```py
 from typing import Any
 
-from pydantic import BaseModel
+from pydantic2 import BaseModel
 
 
 class Model(BaseModel):
@@ -97,7 +97,7 @@ from typing import Any
 
 from typing_extensions import Literal
 
-from pydantic import BaseModel, Field
+from pydantic2 import BaseModel, Field
 
 
 class DivModel(BaseModel):

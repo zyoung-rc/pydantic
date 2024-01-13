@@ -17,8 +17,8 @@ from typing_extensions import Annotated, Literal
 
 @pytest.fixture(scope='module')
 def pydantic_type_adapter():
-    from pydantic import BaseModel, Field, TypeAdapter
-    from pydantic.networks import AnyHttpUrl
+    from pydantic2 import BaseModel, Field, TypeAdapter
+    from pydantic2.networks import AnyHttpUrl
 
     class Blog(BaseModel):
         type: Literal['blog']

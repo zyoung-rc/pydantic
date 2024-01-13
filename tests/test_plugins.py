@@ -6,15 +6,15 @@ from typing import Any, Generator, List
 
 from pydantic_core import ValidationError
 
-from pydantic import BaseModel, TypeAdapter, create_model, dataclasses, field_validator, validate_call
-from pydantic.plugin import (
+from pydantic2 import BaseModel, TypeAdapter, create_model, dataclasses, field_validator, validate_call
+from pydantic2.plugin import (
     PydanticPluginProtocol,
     SchemaTypePath,
     ValidateJsonHandlerProtocol,
     ValidatePythonHandlerProtocol,
     ValidateStringsHandlerProtocol,
 )
-from pydantic.plugin._loader import _plugins
+from pydantic2.plugin._loader import _plugins
 
 
 @contextlib.contextmanager

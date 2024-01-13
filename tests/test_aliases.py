@@ -5,7 +5,7 @@ from typing import Any, ContextManager, List, Optional
 import pytest
 from dirty_equals import IsStr
 
-from pydantic import (
+from pydantic2 import (
     AliasChoices,
     AliasGenerator,
     AliasPath,

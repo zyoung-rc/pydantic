@@ -4,7 +4,7 @@ from typing import Any, List, Optional
 import pytest
 from pydantic_core import PydanticUndefined, ValidationError
 
-from pydantic import BaseModel, ConfigDict, Field, PrivateAttr, PydanticDeprecatedSince20
+from pydantic2 import BaseModel, ConfigDict, Field, PrivateAttr, PydanticDeprecatedSince20
 
 
 class Model(BaseModel):
@@ -303,7 +303,7 @@ def test_simple_pickle():
 def test_recursive_pickle(create_module):
     @create_module
     def module():
-        from pydantic import BaseModel, PrivateAttr
+        from pydantic2 import BaseModel, PrivateAttr
 
         class PickleModel(BaseModel):
             a: float
@@ -330,7 +330,7 @@ def test_recursive_pickle(create_module):
 def test_pickle_undefined(create_module):
     @create_module
     def module():
-        from pydantic import BaseModel, PrivateAttr
+        from pydantic2 import BaseModel, PrivateAttr
 
         class PickleModel(BaseModel):
             a: float

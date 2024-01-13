@@ -3,9 +3,9 @@ from typing import List, Tuple
 import pytest
 from pydantic_core import CoreSchema
 
-from pydantic import BaseModel, GetJsonSchemaHandler, ValidationError, model_validator, parse_obj_as
-from pydantic.functional_serializers import model_serializer
-from pydantic.json_schema import JsonSchemaValue
+from pydantic2 import BaseModel, GetJsonSchemaHandler, ValidationError, model_validator, parse_obj_as
+from pydantic2.functional_serializers import model_serializer
+from pydantic2.json_schema import JsonSchemaValue
 
 
 class Model(BaseModel):

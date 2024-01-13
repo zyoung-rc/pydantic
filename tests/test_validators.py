@@ -15,7 +15,7 @@ from dirty_equals import HasRepr, IsInstance
 from pydantic_core import core_schema
 from typing_extensions import Annotated, Literal, TypedDict
 
-from pydantic import (
+from pydantic2 import (
     BaseModel,
     ConfigDict,
     Field,
@@ -33,8 +33,8 @@ from pydantic import (
     validate_call,
     validator,
 )
-from pydantic.dataclasses import dataclass as pydantic_dataclass
-from pydantic.functional_validators import AfterValidator, BeforeValidator, PlainValidator, WrapValidator
+from pydantic2.dataclasses import dataclass as pydantic_dataclass
+from pydantic2.functional_validators import AfterValidator, BeforeValidator, PlainValidator, WrapValidator
 
 V1_VALIDATOR_DEPRECATION_MATCH = r'Pydantic V1 style `@validator` validators are deprecated'
 

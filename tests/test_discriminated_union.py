@@ -9,10 +9,10 @@ from dirty_equals import HasRepr, IsStr
 from pydantic_core import SchemaValidator, core_schema
 from typing_extensions import Annotated, Literal
 
-from pydantic import BaseModel, ConfigDict, Discriminator, Field, TypeAdapter, ValidationError, field_validator
-from pydantic._internal._discriminated_union import apply_discriminator
-from pydantic.errors import PydanticUserError
-from pydantic.types import Tag
+from pydantic2 import BaseModel, ConfigDict, Discriminator, Field, TypeAdapter, ValidationError, field_validator
+from pydantic2._internal._discriminated_union import apply_discriminator
+from pydantic2.errors import PydanticUserError
+from pydantic2.types import Tag
 
 
 def test_discriminated_union_type():

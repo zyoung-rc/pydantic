@@ -9,7 +9,7 @@ import pytest
 from pydantic_core import CoreSchema, core_schema
 from typing_extensions import Literal
 
-from pydantic import (
+from pydantic2 import (
     BaseModel,
     ConfigDict,
     Field,
@@ -21,14 +21,14 @@ from pydantic import (
     conlist,
     root_validator,
 )
-from pydantic.config import Extra
-from pydantic.deprecated.decorator import validate_arguments
-from pydantic.deprecated.json import custom_pydantic_encoder, pydantic_encoder, timedelta_isoformat
-from pydantic.deprecated.parse import load_file, load_str_bytes
-from pydantic.deprecated.tools import parse_obj_as, schema_json_of, schema_of
-from pydantic.functional_serializers import model_serializer
-from pydantic.json_schema import JsonSchemaValue
-from pydantic.type_adapter import TypeAdapter
+from pydantic2.config import Extra
+from pydantic2.deprecated.decorator import validate_arguments
+from pydantic2.deprecated.json import custom_pydantic_encoder, pydantic_encoder, timedelta_isoformat
+from pydantic2.deprecated.parse import load_file, load_str_bytes
+from pydantic2.deprecated.tools import parse_obj_as, schema_json_of, schema_of
+from pydantic2.functional_serializers import model_serializer
+from pydantic2.json_schema import JsonSchemaValue
+from pydantic2.type_adapter import TypeAdapter
 
 
 def deprecated_from_orm(model_type: Type[BaseModel], obj: Any) -> Any:
@@ -776,7 +776,7 @@ def test_deprecated_module(tmp_path: Path) -> None:
 
 
 def test_deprecated_color():
-    from pydantic.color import Color
+    from pydantic2.color import Color
 
     with pytest.warns(
         PydanticDeprecatedSince20, match='The `Color` class is deprecated, use `pydantic_extra_types` instead.'
@@ -785,7 +785,7 @@ def test_deprecated_color():
 
 
 def test_deprecated_payment():
-    from pydantic import PaymentCardNumber
+    from pydantic2 import PaymentCardNumber
 
     with pytest.warns(
         PydanticDeprecatedSince20,

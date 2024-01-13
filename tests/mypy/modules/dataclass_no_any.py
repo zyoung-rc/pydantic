@@ -1,4 +1,4 @@
-from pydantic.dataclasses import dataclass
+from pydantic2.dataclasses import dataclass
 
 
 @dataclass

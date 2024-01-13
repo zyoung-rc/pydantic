@@ -15,11 +15,11 @@ from typing import Any
 
 from dirty_equals import HasRepr, IsInstance, IsStr
 
-from pydantic import BaseModel, ConfigDict
-from pydantic._internal._core_metadata import CoreMetadataHandler
-from pydantic._internal._core_utils import CoreSchemaOrField
-from pydantic.errors import PydanticInvalidForJsonSchema
-from pydantic.json_schema import GenerateJsonSchema, JsonSchemaValue
+from pydantic2 import BaseModel, ConfigDict
+from pydantic2._internal._core_metadata import CoreMetadataHandler
+from pydantic2._internal._core_utils import CoreSchemaOrField
+from pydantic2.errors import PydanticInvalidForJsonSchema
+from pydantic2.json_schema import GenerateJsonSchema, JsonSchemaValue
 
 
 class _ErrorKey(str):

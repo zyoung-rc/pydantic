@@ -7,7 +7,7 @@ If you don't want to use Pydantic's `BaseModel` you can instead get the same dat
 ```py
 from datetime import datetime
 
-from pydantic.dataclasses import dataclass
+from pydantic2.dataclasses import dataclass
 
 
 @dataclass
@@ -50,8 +50,8 @@ Fields that require a `default_factory` can be specified by either a `pydantic.F
 import dataclasses
 from typing import List, Optional
 
-from pydantic import Field, TypeAdapter
-from pydantic.dataclasses import dataclass
+from pydantic2 import Field, TypeAdapter
+from pydantic2.dataclasses import dataclass
 
 
 @dataclass
@@ -117,8 +117,8 @@ If you want to modify the `config` like you would with a `BaseModel`, you have t
 * Use `ConfigDict` as the config
 
 ```py
-from pydantic import ConfigDict
-from pydantic.dataclasses import dataclass
+from pydantic2 import ConfigDict
+from pydantic2.dataclasses import dataclass
 
 
 # Option 1 - use directly a dict
@@ -148,8 +148,8 @@ class MyDataclass2:
 Nested dataclasses are supported both in dataclasses and normal models.
 
 ```py
-from pydantic import AnyUrl
-from pydantic.dataclasses import dataclass
+from pydantic2 import AnyUrl
+from pydantic2.dataclasses import dataclass
 
 
 @dataclass
@@ -164,7 +164,7 @@ class Navbar:
 
 navbar = Navbar(button={'href': 'https://example.com'})
 print(navbar)
-#> Navbar(button=NavbarButton(href=Url('https://example.com/')))
+# > Navbar(button=NavbarButton(href=Url('https://example.com/')))
 ```
 
 When used as fields, dataclasses (Pydantic or vanilla) should use dicts as validation inputs.
@@ -176,8 +176,8 @@ Pydantic supports generic dataclasses, including those with type variables.
 ```py
 from typing import Generic, TypeVar
 
-from pydantic import TypeAdapter
-from pydantic.dataclasses import dataclass
+from pydantic2 import TypeAdapter
+from pydantic2.dataclasses import dataclass
 
 T = TypeVar('T')
 
@@ -206,7 +206,7 @@ all the inherited fields.
 ```py
 import dataclasses
 
-import pydantic
+import pydantic2
 
 
 @dataclasses.dataclass
@@ -219,18 +219,18 @@ class Y(Z):
     y: int = 0
 
 
-@pydantic.dataclasses.dataclass
+@pydantic2.dataclasses.dataclass
 class X(Y):
     x: int = 0
 
 
 foo = X(x=b'1', y='2', z='3')
 print(foo)
-#> X(z=3, y=2, x=1)
+# > X(z=3, y=2, x=1)
 
 try:
     X(z='pika')
-except pydantic.ValidationError as e:
+except pydantic2.ValidationError as e:
     print(e)
     """
     1 validation error for X
@@ -250,7 +250,7 @@ import dataclasses
 from datetime import datetime
 from typing import Optional
 
-from pydantic import BaseModel, ConfigDict, ValidationError
+from pydantic2 import BaseModel, ConfigDict, ValidationError
 
 
 @dataclasses.dataclass(frozen=True)
@@ -296,7 +296,7 @@ try:
     foo.user.name = 'bulbi'
 except dataclasses.FrozenInstanceError as e:
     print(e)
-    #> cannot assign to field 'name'
+    # > cannot assign to field 'name'
 ```
 
 ### Use custom types
@@ -308,8 +308,8 @@ In this case you can simply add `arbitrary_types_allowed` in the config!
 ```py
 import dataclasses
 
-from pydantic import BaseModel, ConfigDict
-from pydantic.errors import PydanticSchemaGenerationError
+from pydantic2 import BaseModel, ConfigDict
+from pydantic2.errors import PydanticSchemaGenerationError
 
 
 class ArbitraryType:
@@ -335,6 +335,7 @@ try:
         dc: DC
         other: str
 
+
     # invalid as it is now a pydantic dataclass
     Model(dc=my_dc, other='other')
 except PydanticSchemaGenerationError as e:
@@ -355,7 +356,7 @@ class Model(BaseModel):
 
 m = Model(dc=my_dc, other='other')
 print(repr(m))
-#> Model(dc=DC(a=ArbitraryType(value=3), b='qwe'), other='other')
+# > Model(dc=DC(a=ArbitraryType(value=3), b='qwe'), other='other')
 ```
 
 ### Checking if a dataclass is a pydantic dataclass
@@ -365,7 +366,7 @@ Pydantic dataclasses are still considered dataclasses, so using `dataclasses.is_
 ```py
 import dataclasses
 
-import pydantic
+import pydantic2
 
 
 @dataclasses.dataclass
@@ -373,17 +374,17 @@ class StdLibDataclass:
     id: int
 
 
-PydanticDataclass = pydantic.dataclasses.dataclass(StdLibDataclass)
+PydanticDataclass = pydantic2.dataclasses.dataclass(StdLibDataclass)
 
 print(dataclasses.is_dataclass(StdLibDataclass))
-#> True
-print(pydantic.dataclasses.is_pydantic_dataclass(StdLibDataclass))
-#> False
+# > True
+print(pydantic2.dataclasses.is_pydantic_dataclass(StdLibDataclass))
+# > False
 
 print(dataclasses.is_dataclass(PydanticDataclass))
-#> True
-print(pydantic.dataclasses.is_pydantic_dataclass(PydanticDataclass))
-#> True
+# > True
+print(pydantic2.dataclasses.is_pydantic_dataclass(PydanticDataclass))
+# > True
 ```
 
 ## Initialization hooks
@@ -394,8 +395,8 @@ with the help of the [`@model_validator`](validators.md#model-validators) decora
 ```py
 from typing import Any, Dict
 
-from pydantic import model_validator
-from pydantic.dataclasses import dataclass
+from pydantic2 import model_validator
+from pydantic2.dataclasses import dataclass
 
 
 @dataclass
@@ -441,13 +442,12 @@ Here is the order:
 * `__post_init__`.
 * `model_validator(mode='after')`
 
-
 ```py requires="3.8"
 from dataclasses import InitVar
 from pathlib import Path
 from typing import Optional
 
-from pydantic.dataclasses import dataclass
+from pydantic2.dataclasses import dataclass
 
 
 @dataclass
@@ -480,8 +480,8 @@ make use of the [RootModel](models.md#rootmodel-and-custom-root-types) as follow
 import dataclasses
 from typing import List
 
-from pydantic import RootModel
-from pydantic.dataclasses import dataclass
+from pydantic2 import RootModel
+from pydantic2.dataclasses import dataclass
 
 
 @dataclass

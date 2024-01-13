@@ -1,4 +1,4 @@
-from pydantic import BaseModel, computed_field
+from pydantic2 import BaseModel, computed_field
 
 
 class Square(BaseModel):

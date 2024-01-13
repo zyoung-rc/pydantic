@@ -4,8 +4,8 @@ from typing import Any, List
 
 import pytest
 
-from pydantic import BaseModel, IPvAnyAddress, IPvAnyInterface, IPvAnyNetwork, ValidationError
-from pydantic.config import ConfigDict
+from pydantic2 import BaseModel, IPvAnyAddress, IPvAnyInterface, IPvAnyNetwork, ValidationError
+from pydantic2.config import ConfigDict
 
 
 @pytest.mark.parametrize(

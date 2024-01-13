@@ -12,7 +12,7 @@ import pytest
 from pydantic_core import PydanticSerializationError, core_schema, to_jsonable_python
 from typing_extensions import Annotated, TypedDict
 
-from pydantic import (
+from pydantic2 import (
     BaseModel,
     Field,
     FieldSerializationInfo,
@@ -27,8 +27,8 @@ from pydantic import (
     field_serializer,
     model_serializer,
 )
-from pydantic.config import ConfigDict
-from pydantic.functional_serializers import PlainSerializer, WrapSerializer
+from pydantic2.config import ConfigDict
+from pydantic2.functional_serializers import PlainSerializer, WrapSerializer
 
 
 def test_serialize_extra_allow() -> None:

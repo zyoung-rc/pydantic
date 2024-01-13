@@ -27,7 +27,7 @@ from dirty_equals import HasRepr, IsStr
 from pydantic_core import ErrorDetails, InitErrorDetails, PydanticSerializationError, core_schema
 from typing_extensions import Annotated, Literal, TypedDict, get_args
 
-from pydantic import (
+from pydantic2 import (
     BaseModel,
     ConfigDict,
     GetCoreSchemaHandler,
@@ -44,8 +44,8 @@ from pydantic import (
     root_validator,
     validator,
 )
-from pydantic.fields import Field, computed_field
-from pydantic.functional_serializers import (
+from pydantic2.fields import Field, computed_field
+from pydantic2.functional_serializers import (
     field_serializer,
     model_serializer,
 )
@@ -1729,9 +1729,9 @@ def test_exclude_none_with_extra():
 
 
 def test_str_method_inheritance():
-    import pydantic
+    import pydantic2
 
-    class Foo(pydantic.BaseModel):
+    class Foo(pydantic2.BaseModel):
         x: int = 3
         y: int = 4
 
@@ -1746,9 +1746,9 @@ def test_str_method_inheritance():
 
 
 def test_repr_method_inheritance():
-    import pydantic
+    import pydantic2
 
-    class Foo(pydantic.BaseModel):
+    class Foo(pydantic2.BaseModel):
         x: int = 3
         y: int = 4
 
@@ -2147,7 +2147,7 @@ def test_resolve_annotations_module_missing(tmp_path):
     # language=Python
     file_path.write_text(
         """
-from pydantic import BaseModel
+from pydantic2 import BaseModel
 class User(BaseModel):
     id: int
     name: str = 'Jane Doe'
@@ -2592,7 +2592,7 @@ def test_model_repr_before_validation():
 def test_custom_exception_handler():
     from traceback import TracebackException
 
-    from pydantic import BaseModel
+    from pydantic2 import BaseModel
 
     traceback_exceptions = []
 

@@ -8,17 +8,17 @@ from types import ModuleType
 
 import pytest
 
-import pydantic
+import pydantic2
 
 
 @pytest.mark.filterwarnings('ignore::DeprecationWarning')
 def test_init_export():
-    for name in dir(pydantic):
-        getattr(pydantic, name)
+    for name in dir(pydantic2):
+        getattr(pydantic2, name)
 
 
 @pytest.mark.filterwarnings('ignore::DeprecationWarning')
-@pytest.mark.parametrize(('attr_name', 'value'), list(pydantic._dynamic_imports.items()))
+@pytest.mark.parametrize(('attr_name', 'value'), list(pydantic2._dynamic_imports.items()))
 def test_public_api_dynamic_imports(attr_name, value):
     package, module_name = value
     if module_name == '__module__':
@@ -64,7 +64,7 @@ def test_public_internal():
 # language=Python
 IMPORTED_PYDANTIC_CODE = """
 import sys
-import pydantic
+import pydantic2
 
 modules = list(sys.modules.keys())
 
@@ -84,7 +84,7 @@ def test_import_pydantic(subprocess_run_code):
 # language=Python
 IMPORTED_BASEMODEL_CODE = """
 import sys
-from pydantic import BaseModel
+from pydantic2 import BaseModel
 
 modules = list(sys.modules.keys())
 
@@ -106,11 +106,11 @@ def test_import_base_model(subprocess_run_code):
 def test_dataclass_import(subprocess_run_code):
     @subprocess_run_code
     def run_in_subprocess():
-        import pydantic
+        import pydantic2
 
-        assert pydantic.dataclasses.__name__ == 'pydantic.dataclasses'
+        assert pydantic2.dataclasses.__name__ == 'pydantic.dataclasses'
 
-        @pydantic.dataclasses.dataclass
+        @pydantic2.dataclasses.dataclass
         class Foo:
             a: int
 
@@ -125,11 +125,11 @@ def test_dataclass_import(subprocess_run_code):
 def test_dataclass_import2(subprocess_run_code):
     @subprocess_run_code
     def run_in_subprocess():
-        import pydantic.dataclasses
+        import pydantic2.dataclasses
 
-        assert pydantic.dataclasses.__name__ == 'pydantic.dataclasses'
+        assert pydantic2.dataclasses.__name__ == 'pydantic.dataclasses'
 
-        @pydantic.dataclasses.dataclass
+        @pydantic2.dataclasses.dataclass
         class Foo:
             a: int
 

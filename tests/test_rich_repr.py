@@ -3,8 +3,8 @@ from typing import List, Optional
 
 import pytest
 
-from pydantic import BaseModel
-from pydantic.color import Color
+from pydantic2 import BaseModel
+from pydantic2.color import Color
 
 
 @pytest.fixture(scope='session', name='User')

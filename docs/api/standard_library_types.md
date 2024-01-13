@@ -22,7 +22,7 @@ A standard `bool` field will raise a `ValidationError` if the value is not one o
 Here is a script demonstrating some of these behaviors:
 
 ```py
-from pydantic import BaseModel, ValidationError
+from pydantic2 import BaseModel, ValidationError
 
 
 class BooleanModel(BaseModel):
@@ -30,11 +30,11 @@ class BooleanModel(BaseModel):
 
 
 print(BooleanModel(bool_value=False))
-#> bool_value=False
+# > bool_value=False
 print(BooleanModel(bool_value='False'))
-#> bool_value=False
+# > bool_value=False
 print(BooleanModel(bool_value=1))
-#> bool_value=True
+# > bool_value=True
 try:
     BooleanModel(bool_value=[])
 except ValidationError as e:
@@ -64,7 +64,7 @@ types:
 ```py
 from datetime import datetime
 
-from pydantic import BaseModel
+from pydantic2 import BaseModel
 
 
 class Event(BaseModel):
@@ -91,7 +91,7 @@ print(event.model_dump())
 ```py
 from datetime import date
 
-from pydantic import BaseModel
+from pydantic2 import BaseModel
 
 
 class Birthday(BaseModel):
@@ -101,7 +101,7 @@ class Birthday(BaseModel):
 my_birthday = Birthday(d=1679616000.0)
 
 print(my_birthday.model_dump())
-#> {'d': datetime.date(2023, 3, 24)}
+# > {'d': datetime.date(2023, 3, 24)}
 ```
 
 ### `datetime.time`
@@ -114,7 +114,7 @@ print(my_birthday.model_dump())
 ```py
 from datetime import time
 
-from pydantic import BaseModel
+from pydantic2 import BaseModel
 
 
 class Meeting(BaseModel):
@@ -124,7 +124,7 @@ class Meeting(BaseModel):
 m = Meeting(t=time(4, 8, 16))
 
 print(m.model_dump())
-#> {'t': datetime.time(4, 8, 16)}
+# > {'t': datetime.time(4, 8, 16)}
 ```
 
 ### `datetime.timedelta`
@@ -140,7 +140,7 @@ print(m.model_dump())
 ```py
 from datetime import timedelta
 
-from pydantic import BaseModel
+from pydantic2 import BaseModel
 
 
 class Model(BaseModel):
@@ -176,14 +176,14 @@ Pydantic supports the following numeric types from the Python standard library:
 
 * Validation: Pydantic attempts to convert the value to a string, then passes the string to `Decimal(v)`.
 * Serialization: Pydantic serializes `Decimal` types as strings.
-You can use a custom serializer to override this behavior if desired. For example:
+  You can use a custom serializer to override this behavior if desired. For example:
 
 ```py
 from decimal import Decimal
 
 from typing_extensions import Annotated
 
-from pydantic import BaseModel, PlainSerializer
+from pydantic2 import BaseModel, PlainSerializer
 
 
 class Model(BaseModel):
@@ -220,7 +220,7 @@ Subclass of `enum.Enum` checks that the value is a valid member of the enum.
 ```py
 from enum import Enum, IntEnum
 
-from pydantic import BaseModel, ValidationError
+from pydantic2 import BaseModel, ValidationError
 
 
 class FruitEnum(str, Enum):
@@ -267,7 +267,7 @@ Handled the same as `list` above.
 ```py
 from typing import List, Optional
 
-from pydantic import BaseModel
+from pydantic2 import BaseModel
 
 
 class Model(BaseModel):
@@ -293,7 +293,7 @@ Handled the same as `tuple` above.
 ```py
 from typing import Optional, Tuple
 
-from pydantic import BaseModel
+from pydantic2 import BaseModel
 
 
 class Model(BaseModel):
@@ -317,7 +317,7 @@ all fields are treated as having type `Any`.
 ```py
 from typing import NamedTuple
 
-from pydantic import BaseModel, ValidationError
+from pydantic2 import BaseModel, ValidationError
 
 
 class Point(NamedTuple):
@@ -354,7 +354,7 @@ Handled the same as `deque` above.
 ```py
 from typing import Deque, Optional
 
-from pydantic import BaseModel
+from pydantic2 import BaseModel
 
 
 class Model(BaseModel):
@@ -379,7 +379,7 @@ Handled the same as `set` above.
 ```py
 from typing import Optional, Set
 
-from pydantic import BaseModel
+from pydantic2 import BaseModel
 
 
 class Model(BaseModel):
@@ -407,7 +407,7 @@ Handled the same as `frozenset` above.
 ```py
 from typing import FrozenSet, Optional
 
-from pydantic import BaseModel
+from pydantic2 import BaseModel
 
 
 class Model(BaseModel):
@@ -452,7 +452,7 @@ Here is a simple example using `typing.Sequence`:
 ```py
 from typing import Sequence
 
-from pydantic import BaseModel
+from pydantic2 import BaseModel
 
 
 class Model(BaseModel):
@@ -477,7 +477,7 @@ generator or a remote data loader), you can use a field of type `Iterable`:
 ```py
 from typing import Iterable
 
-from pydantic import BaseModel
+from pydantic2 import BaseModel
 
 
 class Model(BaseModel):
@@ -525,7 +525,7 @@ Though the yielded values are not validated eagerly, they are still validated wh
 ```python
 from typing import Iterable
 
-from pydantic import BaseModel, ValidationError
+from pydantic2 import BaseModel, ValidationError
 
 
 class Model(BaseModel):
@@ -561,7 +561,7 @@ except ValidationError as e:
 `dict(v)` is used to attempt to convert a dictionary. see `typing.Dict` below for sub-type constraints.
 
 ```py
-from pydantic import BaseModel, ValidationError
+from pydantic2 import BaseModel, ValidationError
 
 
 class Model(BaseModel):
@@ -588,7 +588,7 @@ except ValidationError as e:
 ```py
 from typing import Dict
 
-from pydantic import BaseModel, ValidationError
+from pydantic2 import BaseModel, ValidationError
 
 
 class Model(BaseModel):
@@ -626,7 +626,7 @@ It is same as `dict` but Pydantic will validate the dictionary since keys are an
 ```py
 from typing_extensions import TypedDict
 
-from pydantic import TypeAdapter, ValidationError
+from pydantic2 import TypeAdapter, ValidationError
 
 
 class User(TypedDict):
@@ -658,7 +658,7 @@ from typing import Optional
 
 from typing_extensions import TypedDict
 
-from pydantic import ConfigDict, TypeAdapter, ValidationError
+from pydantic2 import ConfigDict, TypeAdapter, ValidationError
 
 
 # `total=False` means keys are non-required
@@ -732,7 +732,7 @@ Fields can also be of type `Callable`:
 ```py
 from typing import Callable
 
-from pydantic import BaseModel
+from pydantic2 import BaseModel
 
 
 class Foo(BaseModel):
@@ -791,7 +791,7 @@ Handled the same as `type` above.
 ```py
 from typing import Type
 
-from pydantic import BaseModel, ValidationError
+from pydantic2 import BaseModel, ValidationError
 
 
 class Foo:
@@ -828,7 +828,7 @@ You may also use `Type` to specify that any class is allowed.
 ```py upgrade="skip"
 from typing import Type
 
-from pydantic import BaseModel, ValidationError
+from pydantic2 import BaseModel, ValidationError
 
 
 class Foo:
@@ -859,7 +859,7 @@ except ValidationError as e:
 ```py
 from typing import TypeVar
 
-from pydantic import BaseModel
+from pydantic2 import BaseModel
 
 Foobar = TypeVar('Foobar')
 BoundFloat = TypeVar('BoundFloat', bound=float)
@@ -902,7 +902,7 @@ Enum`s inheriting from `str` are converted using `v.value`. All other types caus
 ```py
 from typing import Optional, Sequence
 
-from pydantic import BaseModel, ValidationError
+from pydantic2 import BaseModel, ValidationError
 
 
 class Model(BaseModel):
@@ -957,7 +957,7 @@ as a lightweight way to specify that a field may accept only specific literal va
 ```py requires="3.8"
 from typing import Literal
 
-from pydantic import BaseModel, ValidationError
+from pydantic2 import BaseModel, ValidationError
 
 
 class Pie(BaseModel):
@@ -983,7 +983,7 @@ without needing to declare custom validators:
 ```py requires="3.8"
 from typing import ClassVar, List, Literal, Union
 
-from pydantic import BaseModel, ValidationError
+from pydantic2 import BaseModel, ValidationError
 
 
 class Cake(BaseModel):
@@ -1022,7 +1022,7 @@ With proper ordering in an annotated `Union`, you can use this to parse types of
 ```py requires="3.8"
 from typing import Literal, Optional, Union
 
-from pydantic import BaseModel
+from pydantic2 import BaseModel
 
 
 class Dessert(BaseModel):

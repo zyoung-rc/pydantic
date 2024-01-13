@@ -40,7 +40,7 @@ from pydantic_core import CoreSchema, PydanticOmit, core_schema, to_jsonable_pyt
 from pydantic_core.core_schema import ComputedField
 from typing_extensions import Annotated, Literal, TypeAlias, assert_never, deprecated, final
 
-from pydantic.warnings import PydanticDeprecatedSince26
+from pydantic2.warnings import PydanticDeprecatedSince26
 
 from ._internal import (
     _config,

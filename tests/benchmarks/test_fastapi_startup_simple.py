@@ -9,9 +9,9 @@ from uuid import UUID
 from annotated_types import Gt
 from typing_extensions import Annotated
 
-from pydantic import AnyUrl, BaseModel, EmailStr, TypeAdapter
-from pydantic.functional_validators import AfterValidator
-from pydantic.types import StringConstraints
+from pydantic2 import AnyUrl, BaseModel, EmailStr, TypeAdapter
+from pydantic2.functional_validators import AfterValidator
+from pydantic2.types import StringConstraints
 
 
 def test_fastapi_startup_perf(benchmark: Callable[[Callable[[], Any]], None]):

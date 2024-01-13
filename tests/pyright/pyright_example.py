@@ -5,7 +5,7 @@ This file is used to test pyright's ability to check pydantic code.
 from functools import cached_property
 from typing import List
 
-from pydantic import BaseModel, Field, computed_field
+from pydantic2 import BaseModel, Field, computed_field
 
 
 class MyModel(BaseModel):

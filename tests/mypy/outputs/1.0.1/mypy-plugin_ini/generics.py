@@ -1,6 +1,6 @@
 from typing import Any, Dict, Generic, Optional, TypeVar
 
-from pydantic import BaseModel
+from pydantic2 import BaseModel
 
 Tbody = TypeVar('Tbody')
 

@@ -10,8 +10,8 @@ import pytest
 from pydantic_core import ArgsKwargs
 from typing_extensions import Annotated, TypedDict
 
-from pydantic import Field, PydanticInvalidForJsonSchema, TypeAdapter, ValidationError, validate_call
-from pydantic.main import BaseModel
+from pydantic2 import Field, PydanticInvalidForJsonSchema, TypeAdapter, ValidationError, validate_call
+from pydantic2.main import BaseModel
 
 skip_pre_39 = pytest.mark.skipif(sys.version_info < (3, 9), reason='testing >= 3.9 behaviour only')
 
@@ -187,7 +187,7 @@ def test_positional_only(create_module):
     module = create_module(
         # language=Python
         """
-from pydantic import validate_call
+from pydantic2 import validate_call
 
 @validate_call
 def foo(a, b, /, c=None):
@@ -571,7 +571,7 @@ def test_validate_all_positional(create_module):
         """
 from datetime import datetime
 
-from pydantic import Field, validate_call
+from pydantic2 import Field, validate_call
 
 @validate_call(config=dict(validate_default=True))
 def foo(dt: datetime = Field(default_factory=lambda: 946684800), /):
@@ -607,7 +607,7 @@ def test_positional_and_keyword_with_same_name(create_module):
     module = create_module(
         # language=Python
         """
-from pydantic import validate_call
+from pydantic2 import validate_call
 
 @validate_call
 def f(a: int, /, **kwargs):

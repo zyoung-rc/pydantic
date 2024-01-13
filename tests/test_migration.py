@@ -2,8 +2,8 @@ import importlib
 
 import pytest
 
-from pydantic._migration import DEPRECATED_MOVED_IN_V2, MOVED_IN_V2, REDIRECT_TO_V1, REMOVED_IN_V2, getattr_migration
-from pydantic.errors import PydanticImportError
+from pydantic2._migration import DEPRECATED_MOVED_IN_V2, MOVED_IN_V2, REDIRECT_TO_V1, REMOVED_IN_V2, getattr_migration
+from pydantic2.errors import PydanticImportError
 
 
 def import_from(dotted_path: str):

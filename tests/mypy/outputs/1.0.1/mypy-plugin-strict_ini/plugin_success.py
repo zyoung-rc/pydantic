@@ -3,8 +3,8 @@ from typing import Any, ClassVar, Generic, List, Optional, TypeVar, Union
 
 from typing_extensions import Self
 
-from pydantic import BaseModel, ConfigDict, Field, create_model, field_validator, model_validator, validator
-from pydantic.dataclasses import dataclass
+from pydantic2 import BaseModel, ConfigDict, Field, create_model, field_validator, model_validator, validator
+from pydantic2.dataclasses import dataclass
 
 
 class Model(BaseModel):

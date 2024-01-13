@@ -7,7 +7,7 @@ from pydantic_core import CoreSchema
 from pydantic_core.core_schema import SerializerFunctionWrapHandler
 from typing_extensions import Annotated, Literal
 
-from pydantic import (
+from pydantic2 import (
     Base64Str,
     BaseModel,
     ConfigDict,
@@ -549,7 +549,7 @@ def test_root_and_data_error():
 def test_pickle_root_model(create_module):
     @create_module
     def module():
-        from pydantic import RootModel
+        from pydantic2 import RootModel
 
         class MyRootModel(RootModel[str]):
             pass
@@ -596,7 +596,7 @@ def test_help(create_module):
         """
 import pydoc
 
-from pydantic import RootModel
+from pydantic2 import RootModel
 
 
 help_result_string = pydoc.render_doc(RootModel)

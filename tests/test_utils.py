@@ -10,11 +10,11 @@ from dirty_equals import IsList
 from pydantic_core import PydanticCustomError, PydanticUndefined, core_schema
 from typing_extensions import Annotated, Literal
 
-from pydantic import BaseModel
-from pydantic._internal import _repr
-from pydantic._internal._core_utils import _WalkCoreSchema
-from pydantic._internal._typing_extra import all_literal_values, get_origin, is_new_type
-from pydantic._internal._utils import (
+from pydantic2 import BaseModel
+from pydantic2._internal import _repr
+from pydantic2._internal._core_utils import _WalkCoreSchema
+from pydantic2._internal._typing_extra import all_literal_values, get_origin, is_new_type
+from pydantic2._internal._utils import (
     BUILTIN_COLLECTIONS,
     ClassAttribute,
     ValueItems,
@@ -24,9 +24,9 @@ from pydantic._internal._utils import (
     smart_deepcopy,
     unique_list,
 )
-from pydantic._internal._validators import import_string
-from pydantic.alias_generators import to_camel, to_pascal, to_snake
-from pydantic.color import Color
+from pydantic2._internal._validators import import_string
+from pydantic2.alias_generators import to_camel, to_pascal, to_snake
+from pydantic2.color import Color
 
 try:
     import devtools
