@@ -21,7 +21,7 @@ include = [
 ]
 
 [project]
-name = 'pydantic'
+name = 'pydantic2'
 description = 'Data validation using Python type hints'
 authors = [
     {name = 'Samuel Colvin', email = 's@muelcolvin.com'},
